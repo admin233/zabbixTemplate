@@ -1,14 +1,12 @@
 package com.block.zabbix;
 
 import com.block.zabbix.api.*;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -69,13 +67,9 @@ public class ZabbixTemplate {
     public List<ZabbixHistoryGetResponse> historyGet(String... itemids) {
         return this.historyGet(Arrays.asList(itemids));
     }
-    public List<ZabbixHistoryGetResponse> historyGet(@NotNull int limit, long timeFrom, long timeTill, String... itemids) {
+    public List<ZabbixHistoryGetResponse> historyGet(int limit, long timeFrom, long timeTill, String... itemids) {
         return this.historyGet(limit,timeFrom,timeTill,Arrays.asList(itemids));
     }
-
-
-
-
 
     public List<ZabbixHistoryGetResponse> historyGet(ZabbixGetItemsByHostResponse zabbixGetItemsByHostResponse) {
         return this.historyGet(0,0,0,zabbixGetItemsByHostResponse);
