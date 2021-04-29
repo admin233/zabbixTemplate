@@ -1,3 +1,5 @@
+package java;
+
 import com.block.zabbix.ZabbixTemplate;
 import com.block.zabbix.api.ZabbixGetItemsByHostResponse;
 import com.block.zabbix.api.ZabbixHistoryGetResponse;
