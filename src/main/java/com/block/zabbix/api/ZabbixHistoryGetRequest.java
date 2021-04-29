@@ -1,11 +1,11 @@
 package com.block.zabbix.api;
 
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 
 public class ZabbixHistoryGetRequest {
@@ -14,6 +14,9 @@ public class ZabbixHistoryGetRequest {
 		this.setOutput("extend").setHistory(0).setSortField("clock").setSortorder("ASC").setLimit(1000);
 	}
 
+	public ZabbixHistoryGetRequest(int history) {
+		this.setOutput("extend").setHistory(history).setSortField("clock").setSortorder("ASC").setLimit(1000);
+	}
 	private Map<String, Object> params = new HashMap<>();
 
 	public Map<String, Object> getParams() {
@@ -36,6 +39,10 @@ public class ZabbixHistoryGetRequest {
 	}
 
 
+	/**
+	 * @param history 指定item返回类型，若指定错误会导致获取数据为空
+	 * @return  返回请求
+	 */
 	public ZabbixHistoryGetRequest setHistory(int history) {
 		this.params.put("history", history);
 		return this;
@@ -46,7 +53,7 @@ public class ZabbixHistoryGetRequest {
 	}
 
 
-	public ZabbixHistoryGetRequest setItemids(@NotNull List<String> itemids) {
+	public ZabbixHistoryGetRequest setItemids(List<String> itemids) {
 		this.params.put("itemids", itemids);
 		return this;
 	}

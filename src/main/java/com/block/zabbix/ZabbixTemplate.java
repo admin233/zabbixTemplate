@@ -56,6 +56,13 @@ public class ZabbixTemplate {
         return result.getResult();
     }
 
+    /**
+     * @param limit 获取指定条数
+     * @param timeFrom 某个时间之后的数据
+     * @param timeTill 某个时间之前的数据
+     * @param zabbixGetItemsByHostResponse item对象
+     * @return ZabbixHistoryGetResponse
+     */
     public List<ZabbixHistoryGetResponse> historyGet( int limit, long timeFrom, long timeTill,ZabbixGetItemsByHostResponse zabbixGetItemsByHostResponse) {
         ZabbixHistoryGetRequest zabbixHistoryGetRequest = new ZabbixHistoryGetRequest();
         zabbixHistoryGetRequest.setItemids(zabbixGetItemsByHostResponse)
@@ -64,23 +71,100 @@ public class ZabbixTemplate {
                 .setTimeTill(timeTill==0?System.currentTimeMillis()/1000:timeTill);
         return this.historyGet(zabbixHistoryGetRequest);
     }
+
+    /**
+     * @param history
+     * @param itemids
+     * @return
+     */
+    public List<ZabbixHistoryGetResponse> historyGet(int history,String... itemids) {
+        return this.historyGet(Arrays.asList(itemids));
+    }
+
+    /**
+     * @param itemids
+     * @return
+     */
     public List<ZabbixHistoryGetResponse> historyGet(String... itemids) {
         return this.historyGet(Arrays.asList(itemids));
     }
+
+    /**
+     * @param limit
+     * @param timeFrom
+     * @param timeTill
+     * @param itemids
+     * @return
+     */
     public List<ZabbixHistoryGetResponse> historyGet(int limit, long timeFrom, long timeTill, String... itemids) {
         return this.historyGet(limit,timeFrom,timeTill,Arrays.asList(itemids));
     }
 
+    /**
+     * @param history
+     * @param limit
+     * @param timeFrom
+     * @param timeTill
+     * @param itemids
+     * @return
+     */
+    public List<ZabbixHistoryGetResponse> historyGet(int history,int limit, long timeFrom, long timeTill, String... itemids) {
+        return this.historyGet(history,limit,timeFrom,timeTill,Arrays.asList(itemids));
+    }
+
+    /**
+     * @param zabbixGetItemsByHostResponse
+     * @return
+     */
     public List<ZabbixHistoryGetResponse> historyGet(ZabbixGetItemsByHostResponse zabbixGetItemsByHostResponse) {
         return this.historyGet(0,0,0,zabbixGetItemsByHostResponse);
     }
 
+    /**
+     * @param itemids
+     * @return
+     */
     public List<ZabbixHistoryGetResponse> historyGet(List<String> itemids) {
         ZabbixHistoryGetRequest zabbixHistoryGetRequest = new ZabbixHistoryGetRequest();
         zabbixHistoryGetRequest.setItemids(itemids);
         return this.historyGet(zabbixHistoryGetRequest);
     }
 
+    /**
+     * @param history
+     * @param itemids
+     * @return
+     */
+    public List<ZabbixHistoryGetResponse> historyGet(int history,List<String> itemids) {
+        ZabbixHistoryGetRequest zabbixHistoryGetRequest = new ZabbixHistoryGetRequest(history);
+        zabbixHistoryGetRequest.setItemids(itemids);
+        return this.historyGet(zabbixHistoryGetRequest);
+    }
+
+    /**
+     * @param history
+     * @param limit
+     * @param timeFrom
+     * @param timeTill
+     * @param itemids
+     * @return
+     */
+    public List<ZabbixHistoryGetResponse> historyGet(int history,int limit, long timeFrom, long timeTill, List<String> itemids) {
+        ZabbixHistoryGetRequest zabbixHistoryGetRequest = new ZabbixHistoryGetRequest(history);
+        zabbixHistoryGetRequest.setItemids(itemids)
+                .setLimit(limit)
+                .setTimeFrom(timeFrom)
+                .setTimeTill(timeTill);
+        return this.historyGet(zabbixHistoryGetRequest);
+    }
+
+    /**参数可选，多参数
+     * @param limit
+     * @param timeFrom
+     * @param timeTill
+     * @param itemids
+     * @return
+     */
     public List<ZabbixHistoryGetResponse> historyGet(int limit, long timeFrom, long timeTill, List<String> itemids) {
         ZabbixHistoryGetRequest zabbixHistoryGetRequest = new ZabbixHistoryGetRequest();
         zabbixHistoryGetRequest.setItemids(itemids)
@@ -90,7 +174,10 @@ public class ZabbixTemplate {
         return this.historyGet(zabbixHistoryGetRequest);
     }
 
-
+    /**
+     * @param zabbixHistoryGetRequest 请求
+     * @return  ZabbixHistoryGetResponse
+     */
     public List<ZabbixHistoryGetResponse> historyGet(ZabbixHistoryGetRequest zabbixHistoryGetRequest) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
