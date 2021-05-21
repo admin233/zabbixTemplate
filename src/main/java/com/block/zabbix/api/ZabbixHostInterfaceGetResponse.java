@@ -1,5 +1,7 @@
 package com.block.zabbix.api;
 
+import java.util.List;
+
 public class ZabbixHostInterfaceGetResponse {
 
 	private String interfaceid;
@@ -18,7 +20,7 @@ public class ZabbixHostInterfaceGetResponse {
 
 	private String useip;
 
-	private ZabbixHostInterfaceDetails details;
+	private List<ZabbixHostInterfaceDetails> details;
 
 	public String getHostid() {
 		return hostid;
@@ -92,11 +94,11 @@ public class ZabbixHostInterfaceGetResponse {
 		return this;
 	}
 
-	public ZabbixHostInterfaceDetails getDetails() {
+	public List<ZabbixHostInterfaceDetails> getDetails() {
 		return details;
 	}
 
-	public ZabbixHostInterfaceGetResponse setDetails(ZabbixHostInterfaceDetails details) {
+	public ZabbixHostInterfaceGetResponse setDetails(List<ZabbixHostInterfaceDetails> details) {
 		this.details = details;
 		return this;
 	}
