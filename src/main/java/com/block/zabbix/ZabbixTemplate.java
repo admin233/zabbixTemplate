@@ -78,7 +78,7 @@ public class ZabbixTemplate {
      * @return
      */
     public List<ZabbixHistoryGetResponse> historyGet(int history,String... itemids) {
-        return this.historyGet(Arrays.asList(itemids));
+        return this.historyGet(history,Arrays.asList(itemids));
     }
 
     /**
@@ -152,9 +152,9 @@ public class ZabbixTemplate {
     public List<ZabbixHistoryGetResponse> historyGet(int history,int limit, long timeFrom, long timeTill, List<String> itemids) {
         ZabbixHistoryGetRequest zabbixHistoryGetRequest = new ZabbixHistoryGetRequest(history);
         zabbixHistoryGetRequest.setItemids(itemids)
-                .setLimit(limit)
                 .setTimeFrom(timeFrom)
-                .setTimeTill(timeTill);
+                .setTimeTill(timeTill==0?System.currentTimeMillis()/1000:timeTill)
+                .setLimit(limit);
         return this.historyGet(zabbixHistoryGetRequest);
     }
 

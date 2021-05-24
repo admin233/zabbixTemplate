@@ -11,11 +11,11 @@ import java.util.Map;
 public class ZabbixHistoryGetRequest {
 
 	public ZabbixHistoryGetRequest() {
-		this.setOutput("extend").setHistory(0).setSortField("clock").setSortorder("ASC").setLimit(1000);
+		this.setOutput("extend").setHistory(0).setSortField("clock").setSortorder("DESC");
 	}
 
 	public ZabbixHistoryGetRequest(int history) {
-		this.setOutput("extend").setHistory(history).setSortField("clock").setSortorder("ASC").setLimit(1000);
+		this.setOutput("extend").setHistory(history).setSortField("clock").setSortorder("DESC");
 	}
 	private Map<String, Object> params = new HashMap<>();
 
