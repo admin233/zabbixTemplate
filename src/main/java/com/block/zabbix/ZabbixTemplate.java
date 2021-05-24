@@ -594,6 +594,33 @@ public class ZabbixTemplate {
         return result.getResult();
     }
 
+    /**
+     * get template by name list
+     * @param names
+     * @return
+     */
+    public List<ZabbixTemplateGetResponse> getTemplateByName(String ... names){
+        ZabbixTemplateGetRequest zabbixTemplateGetRequest = new ZabbixTemplateGetRequest();
+        return templateGet(zabbixTemplateGetRequest.setHost(names));
+    }
+
+    public List<ZabbixTemplateGetResponse> templateGet(ZabbixTemplateGetRequest zabbixTemplateGetRequest){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        ZabbixRequest<Map<String, Object>> dto = new ZabbixRequest<>();
+        dto.setJsonrpc(jsonrpc).setMethod("template.get").setId(22).setAuth(getAuth())
+                .setParams(zabbixTemplateGetRequest.getParams());
+
+        HttpEntity<ZabbixRequest<Map<String, Object>>> request = new HttpEntity<>(dto, headers);
+        ResponseEntity<ZabbixResponse<List<ZabbixTemplateGetResponse>>> response = restTemplate.exchange(url, POST, request,
+                new ParameterizedTypeReference<ZabbixResponse<List<ZabbixTemplateGetResponse>>>() {
+                });
+        ZabbixResponse<List<ZabbixTemplateGetResponse>> result = response.getBody();
+        printError(result);
+        return result.getResult();
+    }
+
     public String getAuth() {
         if (this.auth == null) {
             this.auth = this.userLogin(this.user, this.password);
