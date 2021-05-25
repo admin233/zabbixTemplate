@@ -594,6 +594,17 @@ public class ZabbixTemplate {
         return result.getResult();
     }
 
+
+    /**
+     * get template by host id list
+     * @param hostids
+     * @return
+     */
+    public List<ZabbixTemplateGetResponse> getTemplateByHostids(String...hostids){
+        ZabbixTemplateGetRequest zabbixTemplateGetRequest = new ZabbixTemplateGetRequest();
+        return templateGet(zabbixTemplateGetRequest.setHostids(hostids));
+    }
+
     /**
      * get template by name list
      * @param names
