@@ -22,6 +22,11 @@ public class ZabbixTemplateGetRequest {
 		return this;
 	}
 
+	public ZabbixTemplateGetRequest setHostids(String...hostids){
+		this.params.put("hostids", Arrays.asList(hostids));
+		return this;
+	}
+
 	public ZabbixTemplateGetRequest setHost(String...host) {
 		Map<String, Object> filter = new HashMap<>(1);
 		filter.put("host", Arrays.asList(host));
