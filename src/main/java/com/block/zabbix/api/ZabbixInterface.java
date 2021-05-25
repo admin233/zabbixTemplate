@@ -3,11 +3,12 @@ package com.block.zabbix.api;
 public class ZabbixInterface {
 
 	/**
-	 * 1 - agent;2 - SNMP;3 - IPMI;4 - JMX.
+	 * 1 - agent; 2 - SNMP; 3 - IPMI; 4 - JMX.
 	 */
 	private int type;
 
 	/**
+	 * 该接口是否在主机上用作默认接口。主机上只能有一种类型的接口作为默认设置。
 	 * 0 - not default; 1 - default.
 	 */
 	private int main;
@@ -17,20 +18,35 @@ public class ZabbixInterface {
 	 */
 	private int useip;
 
+	/**
+	 * 接口使用的IP地址。
+	 * 如果通过DNS域名连接，可以设置为空。
+	 */
 	private String ip;
 
+	/**
+	 * 接口使用的DNS名称。
+	 * 如果通过IP连接，可以设置为空。
+	 */
 	private String dns;
 
+	/**
+	 * 接口使用的端口号，可以包含用户宏。
+	 */
 	private String port;
 
+	/**
+	 * Additional object for interface. Required if interface 'type' is SNMP.
+	 */
 	private ZabbixInterfaceDetails details;
 
 	public ZabbixInterface() {
-		this.type = 2;
-		this.main = 1;
+		this.type = 1;
+		this.main = 0;
 		this.useip = 1;
 		this.ip = "";
 		this.dns = "";
+		this.port="";
 	}
 
 	public int getType() {
