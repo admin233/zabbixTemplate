@@ -9,11 +9,8 @@ import java.util.Map;
 
 public class ZabbixHostCreateRequest {
 
-	// "Template Module Generic SNMP" "10204"
-	// "Templates/Modules" "8"
-	// 启用
 	public ZabbixHostCreateRequest() {
-		this.setTemplateIds("10204").setGroupsIds("8").available(1);
+		//this.available(1);
 	}
 
 	private Map<String, Object> params = new HashMap<>();
@@ -98,4 +95,50 @@ public class ZabbixHostCreateRequest {
 		return this;
 	}
 
+	public ZabbixHostCreateRequest setPskIdentityAndPskPw(String tls_psk_identity,String tls_psk){
+		/**
+		 * 到主机的连接。
+		 *
+		 * 可能的值：
+		 * 1 - (默认) 没有加密；
+		 * 2 - PSK；
+		 * 4 - 证书。
+		 */
+		Object tls_connect = this.params.get("tls_connect");
+		/**
+		 * 来自主机的连接。
+		 *
+		 * 可能的值：
+		 * 1 - (默认) 没有加密；
+		 * 2 - PSK；
+		 * 4 - 证书。
+		 */
+		Object tls_accept = this.params.get("tls_accept");
+		if(tls_connect == null){
+			this.params.put("tls_connect", 2);
+		}
+		if(tls_accept == null){
+			this.params.put("tls_accept", 2);
+		}
+
+		this.params.put("tls_psk_identity", tls_psk_identity);
+		this.params.put("tls_psk", tls_psk);
+
+		return this;
+	}
+
+	public ZabbixHostCreateRequest setDescription(String description){
+		this.params.put("description", description);
+		return this;
+	}
+
+	/**
+	 * 用于监控主机的Proxy服务器的hostid。
+	 * @param proxy_hostid
+	 * @return
+	 */
+	public ZabbixHostCreateRequest setProxy_hostid(String proxy_hostid){
+		this.params.put("proxy_hostid", proxy_hostid);
+		return this;
+	}
 }
