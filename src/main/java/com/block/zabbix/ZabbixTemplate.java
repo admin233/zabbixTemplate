@@ -632,6 +632,45 @@ public class ZabbixTemplate {
         return result.getResult();
     }
 
+    /**
+     * 获取所有代理
+     * @return
+     */
+    public List<ZabbixProxyGetResponse> proxyGetAll(){
+        ZabbixProxyGetRequest zabbixProxyGetRequest = new ZabbixProxyGetRequest();
+        return this.proxyGet(zabbixProxyGetRequest);
+    }
+
+    /**
+     * 根据名字获取代理
+     * @param name
+     * @return
+     */
+    public List<ZabbixProxyGetResponse> proxyGetByName(String ... name){
+        ZabbixProxyGetRequest zabbixProxyGetRequest = new ZabbixProxyGetRequest();
+        zabbixProxyGetRequest.setFilterHosts(name);
+        return this.proxyGet(zabbixProxyGetRequest);
+    }
+
+    public List<ZabbixProxyGetResponse> proxyGet(ZabbixProxyGetRequest zabbixProxyGetRequest){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        ZabbixRequest<Map<String, Object>> dto = new ZabbixRequest<>();
+        dto.setJsonrpc(jsonrpc).setMethod("proxy.get").setId(23).setAuth(getAuth())
+                .setParams(zabbixProxyGetRequest.getParams());
+
+        HttpEntity<ZabbixRequest<Map<String, Object>>> request = new HttpEntity<>(dto, headers);
+
+        ResponseEntity<ZabbixResponse<List<ZabbixProxyGetResponse>>> response = restTemplate.exchange(url, POST, request,
+                new ParameterizedTypeReference<ZabbixResponse<List<ZabbixProxyGetResponse>>>() {
+                });
+
+        ZabbixResponse<List<ZabbixProxyGetResponse>> result = response.getBody();
+        printError(result);
+        return result.getResult();
+    }
+
     public String getAuth() {
         if (this.auth == null) {
             this.auth = this.userLogin(this.user, this.password);
