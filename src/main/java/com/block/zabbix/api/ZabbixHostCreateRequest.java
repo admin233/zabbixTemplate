@@ -67,6 +67,15 @@ public class ZabbixHostCreateRequest {
 		return this;
 	}
 
+	/**
+	 * 主机标签
+	 * @param zabbixTag
+	 * @return
+	 */
+	public ZabbixHostCreateRequest setTags(ZabbixTag...zabbixTag){
+		return setTags(Arrays.asList(zabbixTag));
+	}
+
 	public ZabbixHostCreateRequest setTemplateIds(String... templateids) {
 		return this.setTemplates(Arrays.asList(templateids).stream().map(ZabbixTemplateId::new).collect(toList()));
 	}
@@ -141,4 +150,5 @@ public class ZabbixHostCreateRequest {
 		this.params.put("proxy_hostid", proxy_hostid);
 		return this;
 	}
+
 }
