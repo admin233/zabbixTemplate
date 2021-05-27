@@ -29,6 +29,11 @@ public class ZabbixHostCreateRequest {
 		return this;
 	}
 
+	/**
+	 * 用于监控主机的Proxy服务器的hostid。
+	 * @param proxyid
+	 * @return
+	 */
 	public ZabbixHostCreateRequest setProxyid(String proxyid) {
 		this.params.put("proxy_hostid", proxyid);
 		return this;
@@ -138,16 +143,6 @@ public class ZabbixHostCreateRequest {
 
 	public ZabbixHostCreateRequest setDescription(String description){
 		this.params.put("description", description);
-		return this;
-	}
-
-	/**
-	 * 用于监控主机的Proxy服务器的hostid。
-	 * @param proxy_hostid
-	 * @return
-	 */
-	public ZabbixHostCreateRequest setProxy_hostid(String proxy_hostid){
-		this.params.put("proxy_hostid", proxy_hostid);
 		return this;
 	}
 
