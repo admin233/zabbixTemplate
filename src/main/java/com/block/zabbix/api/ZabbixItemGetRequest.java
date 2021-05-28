@@ -1,6 +1,8 @@
 package com.block.zabbix.api;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ZabbixItemGetRequest {
@@ -21,7 +23,12 @@ public class ZabbixItemGetRequest {
 		return this;
 	}
 
-	public ZabbixItemGetRequest setHostids(String hostids) {
+	public ZabbixItemGetRequest setHostids(String ... hostids) {
+		this.params.put("hostids", Arrays.asList(hostids));
+		return this;
+	}
+
+	public ZabbixItemGetRequest setHostids(List<String> hostids) {
 		this.params.put("hostids", hostids);
 		return this;
 	}

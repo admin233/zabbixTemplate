@@ -1,55 +1,91 @@
 package com.block.zabbix.api;
 
-import com.fasterxml.jackson.databind.PropertyNamingStrategies;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class ZabbixTemplateGetResponse {
-    private String proxy_hostid ;
-    private String host ;
-    private String status ;
-    private String disable_until ;
-    private String error ;
-    private String available ;
-    private String errors_from ;
-    private String lastaccess ;
-    private String ipmi_authtype ;
-    private String ipmi_privilege ;
-    private String ipmi_username ;
-    private String ipmi_password ;
-    private String ipmi_disable_until ;
-    private String ipmi_available ;
-    private String snmp_disable_until ;
-    private String snmp_available ;
-    private String maintenanceid ;
-    private String maintenance_status ;
-    private String maintenance_type ;
-    private String maintenance_from ;
-    private String ipmi_errors_from ;
-    private String snmp_errors_from ;
-    private String ipmi_error ;
-    private String snmp_error ;
-    private String jmx_disable_until ;
-    private String jmx_available ;
-    private String jmx_errors_from ;
-    private String jmx_error ;
-    private String name ;
-    private String flags ;
-    private String templateid ;
-    private String description ;
-    private String tls_connect ;
-    private String tls_accept ;
-    private String tls_issuer ;
-    private String tls_subject ;
-    private String tls_psk_identity ;
-    private String tls_psk ;
+    @JsonProperty("proxy_hostid")
+    public String proxyHostid;
+    @JsonProperty("host")
+    public String host;
+    @JsonProperty("status")
+    public String status;
+    @JsonProperty("disable_until")
+    public String disableUntil;
+    @JsonProperty("error")
+    public String error;
+    @JsonProperty("available")
+    public String available;
+    @JsonProperty("errors_from")
+    public String errorsFrom;
+    @JsonProperty("lastaccess")
+    public String lastaccess;
+    @JsonProperty("ipmi_authtype")
+    public String ipmiAuthtype;
+    @JsonProperty("ipmi_privilege")
+    public String ipmiPrivilege;
+    @JsonProperty("ipmi_username")
+    public String ipmiUsername;
+    @JsonProperty("ipmi_password")
+    public String ipmiPassword;
+    @JsonProperty("ipmi_disable_until")
+    public String ipmiDisableUntil;
+    @JsonProperty("ipmi_available")
+    public String ipmiAvailable;
+    @JsonProperty("snmp_disable_until")
+    public String snmpDisableUntil;
+    @JsonProperty("snmp_available")
+    public String snmpAvailable;
+    @JsonProperty("maintenanceid")
+    public String maintenanceid;
+    @JsonProperty("maintenance_status")
+    public String maintenanceStatus;
+    @JsonProperty("maintenance_type")
+    public String maintenanceType;
+    @JsonProperty("maintenance_from")
+    public String maintenanceFrom;
+    @JsonProperty("ipmi_errors_from")
+    public String ipmiErrorsFrom;
+    @JsonProperty("snmp_errors_from")
+    public String snmpErrorsFrom;
+    @JsonProperty("ipmi_error")
+    public String ipmiError;
+    @JsonProperty("snmp_error")
+    public String snmpError;
+    @JsonProperty("jmx_disable_until")
+    public String jmxDisableUntil;
+    @JsonProperty("jmx_available")
+    public String jmxAvailable;
+    @JsonProperty("jmx_errors_from")
+    public String jmxErrorsFrom;
+    @JsonProperty("jmx_error")
+    public String jmxError;
+    @JsonProperty("name")
+    public String name;
+    @JsonProperty("flags")
+    public String flags;
+    @JsonProperty("templateid")
+    public String templateid;
+    @JsonProperty("description")
+    public String description;
+    @JsonProperty("tls_connect")
+    public String tlsConnect;
+    @JsonProperty("tls_accept")
+    public String tlsAccept;
+    @JsonProperty("tls_issuer")
+    public String tlsIssuer;
+    @JsonProperty("tls_subject")
+    public String tlsSubject;
+    @JsonProperty("tls_psk_identity")
+    public String tlsPskIdentity;
+    @JsonProperty("tls_psk")
+    public String tlsPsk;
 
-    public String getProxy_hostid() {
-        return proxy_hostid;
+    public String getProxyHostid() {
+        return proxyHostid;
     }
 
-    public void setProxy_hostid(String proxy_hostid) {
-        this.proxy_hostid = proxy_hostid;
+    public void setProxyHostid(String proxyHostid) {
+        this.proxyHostid = proxyHostid;
     }
 
     public String getHost() {
@@ -68,12 +104,12 @@ public class ZabbixTemplateGetResponse {
         this.status = status;
     }
 
-    public String getDisable_until() {
-        return disable_until;
+    public String getDisableUntil() {
+        return disableUntil;
     }
 
-    public void setDisable_until(String disable_until) {
-        this.disable_until = disable_until;
+    public void setDisableUntil(String disableUntil) {
+        this.disableUntil = disableUntil;
     }
 
     public String getError() {
@@ -92,12 +128,12 @@ public class ZabbixTemplateGetResponse {
         this.available = available;
     }
 
-    public String getErrors_from() {
-        return errors_from;
+    public String getErrorsFrom() {
+        return errorsFrom;
     }
 
-    public void setErrors_from(String errors_from) {
-        this.errors_from = errors_from;
+    public void setErrorsFrom(String errorsFrom) {
+        this.errorsFrom = errorsFrom;
     }
 
     public String getLastaccess() {
@@ -108,68 +144,68 @@ public class ZabbixTemplateGetResponse {
         this.lastaccess = lastaccess;
     }
 
-    public String getIpmi_authtype() {
-        return ipmi_authtype;
+    public String getIpmiAuthtype() {
+        return ipmiAuthtype;
     }
 
-    public void setIpmi_authtype(String ipmi_authtype) {
-        this.ipmi_authtype = ipmi_authtype;
+    public void setIpmiAuthtype(String ipmiAuthtype) {
+        this.ipmiAuthtype = ipmiAuthtype;
     }
 
-    public String getIpmi_privilege() {
-        return ipmi_privilege;
+    public String getIpmiPrivilege() {
+        return ipmiPrivilege;
     }
 
-    public void setIpmi_privilege(String ipmi_privilege) {
-        this.ipmi_privilege = ipmi_privilege;
+    public void setIpmiPrivilege(String ipmiPrivilege) {
+        this.ipmiPrivilege = ipmiPrivilege;
     }
 
-    public String getIpmi_username() {
-        return ipmi_username;
+    public String getIpmiUsername() {
+        return ipmiUsername;
     }
 
-    public void setIpmi_username(String ipmi_username) {
-        this.ipmi_username = ipmi_username;
+    public void setIpmiUsername(String ipmiUsername) {
+        this.ipmiUsername = ipmiUsername;
     }
 
-    public String getIpmi_password() {
-        return ipmi_password;
+    public String getIpmiPassword() {
+        return ipmiPassword;
     }
 
-    public void setIpmi_password(String ipmi_password) {
-        this.ipmi_password = ipmi_password;
+    public void setIpmiPassword(String ipmiPassword) {
+        this.ipmiPassword = ipmiPassword;
     }
 
-    public String getIpmi_disable_until() {
-        return ipmi_disable_until;
+    public String getIpmiDisableUntil() {
+        return ipmiDisableUntil;
     }
 
-    public void setIpmi_disable_until(String ipmi_disable_until) {
-        this.ipmi_disable_until = ipmi_disable_until;
+    public void setIpmiDisableUntil(String ipmiDisableUntil) {
+        this.ipmiDisableUntil = ipmiDisableUntil;
     }
 
-    public String getIpmi_available() {
-        return ipmi_available;
+    public String getIpmiAvailable() {
+        return ipmiAvailable;
     }
 
-    public void setIpmi_available(String ipmi_available) {
-        this.ipmi_available = ipmi_available;
+    public void setIpmiAvailable(String ipmiAvailable) {
+        this.ipmiAvailable = ipmiAvailable;
     }
 
-    public String getSnmp_disable_until() {
-        return snmp_disable_until;
+    public String getSnmpDisableUntil() {
+        return snmpDisableUntil;
     }
 
-    public void setSnmp_disable_until(String snmp_disable_until) {
-        this.snmp_disable_until = snmp_disable_until;
+    public void setSnmpDisableUntil(String snmpDisableUntil) {
+        this.snmpDisableUntil = snmpDisableUntil;
     }
 
-    public String getSnmp_available() {
-        return snmp_available;
+    public String getSnmpAvailable() {
+        return snmpAvailable;
     }
 
-    public void setSnmp_available(String snmp_available) {
-        this.snmp_available = snmp_available;
+    public void setSnmpAvailable(String snmpAvailable) {
+        this.snmpAvailable = snmpAvailable;
     }
 
     public String getMaintenanceid() {
@@ -180,92 +216,92 @@ public class ZabbixTemplateGetResponse {
         this.maintenanceid = maintenanceid;
     }
 
-    public String getMaintenance_status() {
-        return maintenance_status;
+    public String getMaintenanceStatus() {
+        return maintenanceStatus;
     }
 
-    public void setMaintenance_status(String maintenance_status) {
-        this.maintenance_status = maintenance_status;
+    public void setMaintenanceStatus(String maintenanceStatus) {
+        this.maintenanceStatus = maintenanceStatus;
     }
 
-    public String getMaintenance_type() {
-        return maintenance_type;
+    public String getMaintenanceType() {
+        return maintenanceType;
     }
 
-    public void setMaintenance_type(String maintenance_type) {
-        this.maintenance_type = maintenance_type;
+    public void setMaintenanceType(String maintenanceType) {
+        this.maintenanceType = maintenanceType;
     }
 
-    public String getMaintenance_from() {
-        return maintenance_from;
+    public String getMaintenanceFrom() {
+        return maintenanceFrom;
     }
 
-    public void setMaintenance_from(String maintenance_from) {
-        this.maintenance_from = maintenance_from;
+    public void setMaintenanceFrom(String maintenanceFrom) {
+        this.maintenanceFrom = maintenanceFrom;
     }
 
-    public String getIpmi_errors_from() {
-        return ipmi_errors_from;
+    public String getIpmiErrorsFrom() {
+        return ipmiErrorsFrom;
     }
 
-    public void setIpmi_errors_from(String ipmi_errors_from) {
-        this.ipmi_errors_from = ipmi_errors_from;
+    public void setIpmiErrorsFrom(String ipmiErrorsFrom) {
+        this.ipmiErrorsFrom = ipmiErrorsFrom;
     }
 
-    public String getSnmp_errors_from() {
-        return snmp_errors_from;
+    public String getSnmpErrorsFrom() {
+        return snmpErrorsFrom;
     }
 
-    public void setSnmp_errors_from(String snmp_errors_from) {
-        this.snmp_errors_from = snmp_errors_from;
+    public void setSnmpErrorsFrom(String snmpErrorsFrom) {
+        this.snmpErrorsFrom = snmpErrorsFrom;
     }
 
-    public String getIpmi_error() {
-        return ipmi_error;
+    public String getIpmiError() {
+        return ipmiError;
     }
 
-    public void setIpmi_error(String ipmi_error) {
-        this.ipmi_error = ipmi_error;
+    public void setIpmiError(String ipmiError) {
+        this.ipmiError = ipmiError;
     }
 
-    public String getSnmp_error() {
-        return snmp_error;
+    public String getSnmpError() {
+        return snmpError;
     }
 
-    public void setSnmp_error(String snmp_error) {
-        this.snmp_error = snmp_error;
+    public void setSnmpError(String snmpError) {
+        this.snmpError = snmpError;
     }
 
-    public String getJmx_disable_until() {
-        return jmx_disable_until;
+    public String getJmxDisableUntil() {
+        return jmxDisableUntil;
     }
 
-    public void setJmx_disable_until(String jmx_disable_until) {
-        this.jmx_disable_until = jmx_disable_until;
+    public void setJmxDisableUntil(String jmxDisableUntil) {
+        this.jmxDisableUntil = jmxDisableUntil;
     }
 
-    public String getJmx_available() {
-        return jmx_available;
+    public String getJmxAvailable() {
+        return jmxAvailable;
     }
 
-    public void setJmx_available(String jmx_available) {
-        this.jmx_available = jmx_available;
+    public void setJmxAvailable(String jmxAvailable) {
+        this.jmxAvailable = jmxAvailable;
     }
 
-    public String getJmx_errors_from() {
-        return jmx_errors_from;
+    public String getJmxErrorsFrom() {
+        return jmxErrorsFrom;
     }
 
-    public void setJmx_errors_from(String jmx_errors_from) {
-        this.jmx_errors_from = jmx_errors_from;
+    public void setJmxErrorsFrom(String jmxErrorsFrom) {
+        this.jmxErrorsFrom = jmxErrorsFrom;
     }
 
-    public String getJmx_error() {
-        return jmx_error;
+    public String getJmxError() {
+        return jmxError;
     }
 
-    public void setJmx_error(String jmx_error) {
-        this.jmx_error = jmx_error;
+    public void setJmxError(String jmxError) {
+        this.jmxError = jmxError;
     }
 
     public String getName() {
@@ -300,51 +336,51 @@ public class ZabbixTemplateGetResponse {
         this.description = description;
     }
 
-    public String getTls_connect() {
-        return tls_connect;
+    public String getTlsConnect() {
+        return tlsConnect;
     }
 
-    public void setTls_connect(String tls_connect) {
-        this.tls_connect = tls_connect;
+    public void setTlsConnect(String tlsConnect) {
+        this.tlsConnect = tlsConnect;
     }
 
-    public String getTls_accept() {
-        return tls_accept;
+    public String getTlsAccept() {
+        return tlsAccept;
     }
 
-    public void setTls_accept(String tls_accept) {
-        this.tls_accept = tls_accept;
+    public void setTlsAccept(String tlsAccept) {
+        this.tlsAccept = tlsAccept;
     }
 
-    public String getTls_issuer() {
-        return tls_issuer;
+    public String getTlsIssuer() {
+        return tlsIssuer;
     }
 
-    public void setTls_issuer(String tls_issuer) {
-        this.tls_issuer = tls_issuer;
+    public void setTlsIssuer(String tlsIssuer) {
+        this.tlsIssuer = tlsIssuer;
     }
 
-    public String getTls_subject() {
-        return tls_subject;
+    public String getTlsSubject() {
+        return tlsSubject;
     }
 
-    public void setTls_subject(String tls_subject) {
-        this.tls_subject = tls_subject;
+    public void setTlsSubject(String tlsSubject) {
+        this.tlsSubject = tlsSubject;
     }
 
-    public String getTls_psk_identity() {
-        return tls_psk_identity;
+    public String getTlsPskIdentity() {
+        return tlsPskIdentity;
     }
 
-    public void setTls_psk_identity(String tls_psk_identity) {
-        this.tls_psk_identity = tls_psk_identity;
+    public void setTlsPskIdentity(String tlsPskIdentity) {
+        this.tlsPskIdentity = tlsPskIdentity;
     }
 
-    public String getTls_psk() {
-        return tls_psk;
+    public String getTlsPsk() {
+        return tlsPsk;
     }
 
-    public void setTls_psk(String tls_psk) {
-        this.tls_psk = tls_psk;
+    public void setTlsPsk(String tlsPsk) {
+        this.tlsPsk = tlsPsk;
     }
 }

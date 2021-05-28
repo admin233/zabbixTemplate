@@ -1,26 +1,35 @@
 package com.block.zabbix.api;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.PropertyNamingStrategies;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
-
 import java.util.List;
 
-@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class ZabbixProxyGetResponse {
 
-    private String host ;
-    private String status ;
-    private String lastaccess ;
-    private String description ;
-    private String tls_connect ;
-    private String tls_accept ;
-    private String tls_issuer ;
-    private String tls_subject ;
-    private String tls_psk_identity ;
-    private String tls_psk ;
-    private String proxy_address ;
-    private String auto_compress ;
-    private String proxyid ;
+    @JsonProperty("host")
+    public String host;
+    @JsonProperty("status")
+    public String status;
+    @JsonProperty("lastaccess")
+    public String lastaccess;
+    @JsonProperty("description")
+    public String description;
+    @JsonProperty("tls_connect")
+    public String tlsConnect;
+    @JsonProperty("tls_accept")
+    public String tlsAccept;
+    @JsonProperty("tls_issuer")
+    public String tlsIssuer;
+    @JsonProperty("tls_subject")
+    public String tlsSubject;
+    @JsonProperty("tls_psk_identity")
+    public String tlsPskIdentity;
+    @JsonProperty("tls_psk")
+    public String tlsPsk;
+    @JsonProperty("proxy_address")
+    public String proxyAddress;
+    @JsonProperty("auto_compress")
+    public String autoCompress;
+    @JsonProperty("proxyid")
+    public String proxyid;
     @JsonProperty("interface")
     private List<ZabbixProxyInterface> interfaces ;
 
@@ -56,68 +65,68 @@ public class ZabbixProxyGetResponse {
         this.description = description;
     }
 
-    public String getTls_connect() {
-        return tls_connect;
+    public String getTlsConnect() {
+        return tlsConnect;
     }
 
-    public void setTls_connect(String tls_connect) {
-        this.tls_connect = tls_connect;
+    public void setTlsConnect(String tlsConnect) {
+        this.tlsConnect = tlsConnect;
     }
 
-    public String getTls_accept() {
-        return tls_accept;
+    public String getTlsAccept() {
+        return tlsAccept;
     }
 
-    public void setTls_accept(String tls_accept) {
-        this.tls_accept = tls_accept;
+    public void setTlsAccept(String tlsAccept) {
+        this.tlsAccept = tlsAccept;
     }
 
-    public String getTls_issuer() {
-        return tls_issuer;
+    public String getTlsIssuer() {
+        return tlsIssuer;
     }
 
-    public void setTls_issuer(String tls_issuer) {
-        this.tls_issuer = tls_issuer;
+    public void setTlsIssuer(String tlsIssuer) {
+        this.tlsIssuer = tlsIssuer;
     }
 
-    public String getTls_subject() {
-        return tls_subject;
+    public String getTlsSubject() {
+        return tlsSubject;
     }
 
-    public void setTls_subject(String tls_subject) {
-        this.tls_subject = tls_subject;
+    public void setTlsSubject(String tlsSubject) {
+        this.tlsSubject = tlsSubject;
     }
 
-    public String getTls_psk_identity() {
-        return tls_psk_identity;
+    public String getTlsPskIdentity() {
+        return tlsPskIdentity;
     }
 
-    public void setTls_psk_identity(String tls_psk_identity) {
-        this.tls_psk_identity = tls_psk_identity;
+    public void setTlsPskIdentity(String tlsPskIdentity) {
+        this.tlsPskIdentity = tlsPskIdentity;
     }
 
-    public String getTls_psk() {
-        return tls_psk;
+    public String getTlsPsk() {
+        return tlsPsk;
     }
 
-    public void setTls_psk(String tls_psk) {
-        this.tls_psk = tls_psk;
+    public void setTlsPsk(String tlsPsk) {
+        this.tlsPsk = tlsPsk;
     }
 
-    public String getProxy_address() {
-        return proxy_address;
+    public String getProxyAddress() {
+        return proxyAddress;
     }
 
-    public void setProxy_address(String proxy_address) {
-        this.proxy_address = proxy_address;
+    public void setProxyAddress(String proxyAddress) {
+        this.proxyAddress = proxyAddress;
     }
 
-    public String getAuto_compress() {
-        return auto_compress;
+    public String getAutoCompress() {
+        return autoCompress;
     }
 
-    public void setAuto_compress(String auto_compress) {
-        this.auto_compress = auto_compress;
+    public void setAutoCompress(String autoCompress) {
+        this.autoCompress = autoCompress;
     }
 
     public String getProxyid() {

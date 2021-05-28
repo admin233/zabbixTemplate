@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
-
 public class ZabbixHistoryGetRequest {
 
 	public ZabbixHistoryGetRequest() {
@@ -58,13 +56,11 @@ public class ZabbixHistoryGetRequest {
 		return this;
 	}
 
-	public ZabbixHistoryGetRequest setItemids(ZabbixGetItemsByHostResponse zabbixGetItemsByHostResponse) {
+	public ZabbixHistoryGetRequest setItemids(ZabbixItemGetResponse zabbixGetItemsByHostResponse) {
 		this.params.put("itemids", zabbixGetItemsByHostResponse.getItemid());
 		setHistory(Integer.parseInt(zabbixGetItemsByHostResponse.getValueType()));
 		return this;
 	}
-
-
 
 	public ZabbixHistoryGetRequest setSortField(String sortfield) {
 		this.params.put("sortfield", sortfield);
