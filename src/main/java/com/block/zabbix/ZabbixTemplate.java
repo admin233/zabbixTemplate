@@ -6,10 +6,11 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
 
 import static org.springframework.http.HttpMethod.POST;
 
@@ -27,6 +28,13 @@ public class ZabbixTemplate {
     private String auth = null;
 
     public ZabbixTemplate(String url, String user, String password) {
+//        RestTemplate t_restTemplate = new RestTemplate();
+//        t_restTemplate.getMessageConverters().add(new MyMappingJackson2HttpMessageConverter());
+//        List<HttpMessageConverter<?>> messageConverters = new ArrayList<>();
+//        MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+//        converter.setSupportedMediaTypes(Collections.singletonList(MediaType.ALL));
+//        messageConverters.add(converter);
+//        t_restTemplate.setMessageConverters(messageConverters);
         this(url, "2.0", user, password, new RestTemplate());
     }
 
@@ -63,7 +71,7 @@ public class ZabbixTemplate {
      * @param zabbixGetItemsByHostResponse item对象
      * @return ZabbixHistoryGetResponse
      */
-    public List<ZabbixHistoryGetResponse> historyGet( int limit, long timeFrom, long timeTill,ZabbixGetItemsByHostResponse zabbixGetItemsByHostResponse) {
+    public List<ZabbixHistoryGetResponse> historyGet( int limit, long timeFrom, long timeTill,ZabbixItemGetResponse zabbixGetItemsByHostResponse) {
         ZabbixHistoryGetRequest zabbixHistoryGetRequest = new ZabbixHistoryGetRequest();
         zabbixHistoryGetRequest.setItemids(zabbixGetItemsByHostResponse)
                 .setLimit(limit==0?1000:limit)
@@ -116,7 +124,7 @@ public class ZabbixTemplate {
      * @param zabbixGetItemsByHostResponse
      * @return
      */
-    public List<ZabbixHistoryGetResponse> historyGet(ZabbixGetItemsByHostResponse zabbixGetItemsByHostResponse) {
+    public List<ZabbixHistoryGetResponse> historyGet(ZabbixItemGetResponse zabbixGetItemsByHostResponse) {
         return this.historyGet(0,0,0,zabbixGetItemsByHostResponse);
     }
 
@@ -508,17 +516,17 @@ public class ZabbixTemplate {
         return result.getResult();
     }
 
-    public List<ZabbixGetItemsByHostResponse> getItemsByHost(List<String> hostList) {
-        ZabbixGetItemsByHostRequest ZabbixGetItemsByHostRequest = new ZabbixGetItemsByHostRequest();
-        return getItemsByHost(ZabbixGetItemsByHostRequest.setHostId(hostList));
+    public List<ZabbixItemGetResponse> getItemsByHost(List<String> hostList) {
+        ZabbixItemGetRequest zabbixItemGetRequest = new ZabbixItemGetRequest();
+        return getItemsByHost(zabbixItemGetRequest.setHostids(hostList));
     }
 
-    public List<ZabbixGetItemsByHostResponse> getItemsByHost(String... hostId) {
-        ZabbixGetItemsByHostRequest ZabbixGetItemsByHostRequest = new ZabbixGetItemsByHostRequest();
-        return getItemsByHost(ZabbixGetItemsByHostRequest.setHostId(hostId));
+    public List<ZabbixItemGetResponse> getItemsByHost(String... hostId) {
+        ZabbixItemGetRequest zabbixItemGetRequest = new ZabbixItemGetRequest();
+        return getItemsByHost(zabbixItemGetRequest.setHostids(hostId));
     }
 
-    public List<ZabbixGetItemsByHostResponse> getItemsByHost(ZabbixGetItemsByHostRequest zabbixGetItemsByHostRequest) {
+    public List<ZabbixItemGetResponse> getItemsByHost(ZabbixItemGetRequest zabbixGetItemsByHostRequest) {
 
         HttpHeaders headers = new HttpHeaders();
 
@@ -528,11 +536,11 @@ public class ZabbixTemplate {
         dto.setJsonrpc(jsonrpc).setMethod("item.get").setId(2).setAuth(getAuth())
                 .setParams(zabbixGetItemsByHostRequest.getParams());
         HttpEntity<ZabbixRequest<Map<String, Object>>> request = new HttpEntity<>(dto, headers);
-        ResponseEntity<ZabbixResponse<List<ZabbixGetItemsByHostResponse>>> response = restTemplate.exchange(url, POST, request,
-                new ParameterizedTypeReference<ZabbixResponse<List<ZabbixGetItemsByHostResponse>>>() {
+        ResponseEntity<ZabbixResponse<List<ZabbixItemGetResponse>>> response = restTemplate.exchange(url, POST, request,
+                new ParameterizedTypeReference<ZabbixResponse<List<ZabbixItemGetResponse>>>() {
                 });
 
-        ZabbixResponse<List<ZabbixGetItemsByHostResponse>> result = response.getBody();
+        ZabbixResponse<List<ZabbixItemGetResponse>> result = response.getBody();
         printError(result);
         return result.getResult();
     }
