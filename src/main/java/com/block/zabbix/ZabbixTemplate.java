@@ -681,6 +681,35 @@ public class ZabbixTemplate {
         return result.getResult();
     }
 
+    /**
+     * 根据名称获取媒介类型
+     * @param name
+     * @return
+     */
+    public List<ZabbixMediaTypeGetResponse> mediaTypeGet(String ... name){
+        ZabbixMediaTypeRequest zabbixMediaTypeRequest = new ZabbixMediaTypeRequest();
+        zabbixMediaTypeRequest.setOutput("extend").setFilterNames(name);
+        return this.mediaTypeGet(zabbixMediaTypeRequest);
+    }
+
+    public List<ZabbixMediaTypeGetResponse> mediaTypeGet(ZabbixMediaTypeRequest zabbixMediaTypeRequest){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        ZabbixRequest<Map<String, Object>> dto = new ZabbixRequest<>();
+        dto.setJsonrpc(jsonrpc).setMethod("mediatype.get").setId(24).setAuth(getAuth())
+                .setParams(zabbixMediaTypeRequest.getParams());
+
+        HttpEntity<ZabbixRequest<Map<String, Object>>> request = new HttpEntity<>(dto, headers);
+        ResponseEntity<ZabbixResponse<List<ZabbixMediaTypeGetResponse>>> response = restTemplate.exchange(url, POST,
+                request, new ParameterizedTypeReference<ZabbixResponse<List<ZabbixMediaTypeGetResponse>>>() {
+                });
+
+        ZabbixResponse<List<ZabbixMediaTypeGetResponse>> result = response.getBody();
+        printError(result);
+        return result.getResult();
+    }
+
     public String getAuth() {
         if (this.auth == null) {
             this.auth = this.userLogin(this.user, this.password);
