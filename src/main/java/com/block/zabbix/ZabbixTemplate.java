@@ -1,13 +1,15 @@
 package com.block.zabbix;
 
-import com.block.zabbix.api.*;
+import com.block.zabbix.api.ZabbixRequest;
+import com.block.zabbix.api.ZabbixResponse;
+import com.block.zabbix.pojo.ZabbixUserLogin;
+import com.block.zabbix.request.*;
+import com.block.zabbix.response.*;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
@@ -71,7 +73,7 @@ public class ZabbixTemplate {
      * @param zabbixGetItemsByHostResponse item对象
      * @return ZabbixHistoryGetResponse
      */
-    public List<ZabbixHistoryGetResponse> historyGet( int limit, long timeFrom, long timeTill,ZabbixItemGetResponse zabbixGetItemsByHostResponse) {
+    public List<ZabbixHistoryGetResponse> historyGet(int limit, long timeFrom, long timeTill, ZabbixItemGetResponse zabbixGetItemsByHostResponse) {
         ZabbixHistoryGetRequest zabbixHistoryGetRequest = new ZabbixHistoryGetRequest();
         zabbixHistoryGetRequest.setItemids(zabbixGetItemsByHostResponse)
                 .setLimit(limit==0?1000:limit)
