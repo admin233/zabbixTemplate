@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ZabbixGenericRequest {
-	private Map<String, Object> params = new HashMap<>();
+	public Map<String, Object> params = new HashMap<>();
 
 	public ZabbixGenericRequest() {
 	}
