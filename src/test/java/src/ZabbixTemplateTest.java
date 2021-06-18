@@ -1,16 +1,18 @@
 package src;
 
 import com.block.zabbix.ZabbixTemplate;
-import com.block.zabbix.api.ZabbixGetItemsByHostResponse;
-import com.block.zabbix.api.ZabbixHistoryGetResponse;
-import com.block.zabbix.api.ZabbixHostGetResponse;
+import com.block.zabbix.pojo.ZabbixInterface;
+import com.block.zabbix.pojo.ZabbixTag;
+import com.block.zabbix.request.ZabbixHostCreateRequest;
+import com.block.zabbix.request.ZabbixHostUpdateRequest;
+import com.block.zabbix.request.ZabbixProxyGetRequest;
+import com.block.zabbix.request.ZabbixUserGroupCreateRequest;
+import com.block.zabbix.response.*;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 
-import src.ReadProperties;
-
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class ZabbixTemplateTest {
 
@@ -19,11 +21,23 @@ public class ZabbixTemplateTest {
     private String url = ReadProperties.get("url");
 
     private String password = ReadProperties.get("password");
+
     ZabbixTemplate zabbixTemplate;
+
+    ObjectMapper mapper;
 
     @Before
     public void init() {
         zabbixTemplate = new ZabbixTemplate(url,userId,password);
+        /**
+         * ObjectMapper是JSON操作的核心，Jackson的所有JSON操作都是在ObjectMapper中实现。
+         * ObjectMapper有多个JSON序列化的方法，可以把JSON字符串保存File、OutputStream等不同的介质中。
+         * writeValue(File arg0, Object arg1)把arg1转成json序列，并保存到arg0文件中。
+         * writeValue(OutputStream arg0, Object arg1)把arg1转成json序列，并保存到arg0输出流中。
+         * writeValueAsBytes(Object arg0)把arg0转成json序列，并把结果输出成字节数组。
+         * writeValueAsString(Object arg0)把arg0转成json序列，并把结果输出成字符串。
+         */
+        mapper = new ObjectMapper();
     }
 
 
@@ -41,8 +55,8 @@ public class ZabbixTemplateTest {
 
 
     @Test
-    public void getItemSByHostTest() {
-        List<ZabbixGetItemsByHostResponse> zabbixGetItemsByHostResponse = zabbixTemplate.getItemsByHost("10084");
+    public void getItemsByHostTest() {
+        List<ZabbixItemGetResponse> zabbixGetItemsByHostResponse = zabbixTemplate.getItemsByHost("10084");
         zabbixGetItemsByHostResponse.stream().forEach(o -> System.out.println(o.getItemid() + "---" + o.getHostid()+"--"+o.getName()));
     }
 
@@ -54,5 +68,177 @@ public class ZabbixTemplateTest {
         System.out.println("时间转换"+new Date(1619428899));
     }
 
+    @Test
+    public void hostGroup() throws Exception{
+        List<ZabbixHostGroupGetResponse>  result = zabbixTemplate.hostGroupGet("demoHostGroup2");
+        result.forEach(o -> {
+            try {
+                String json = mapper.writeValueAsString(o);
+                System.out.println(json);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        });
+
+//        ZabbixHostGroupGenericResponse response = zabbixTemplate.hostGroupCreate("demoHostGroup2");
+//        System.out.println(response.getGroupids().get(0));
+    }
+
+    @Test
+    public void hostGroupCreate() throws Exception{
+        ZabbixHostGroupGenericResponse result = zabbixTemplate.hostGroupCreate("testgruop");
+        result.getGroupids().forEach(o ->{
+            try {
+                String json = mapper.writeValueAsString(o);
+                System.out.println(json);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        });
+    }
+
+    @Test
+    public void hostGet() throws Exception{
+        List<ZabbixHostGetResponse> resultList = zabbixTemplate.hostGet("test");
+//        List<ZabbixHostGetResponse> resultList = zabbixTemplate.hostGetAll();
+        resultList.forEach(o ->{
+            try{
+                String json = mapper.writeValueAsString(o);
+                System.out.println(json);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        });
+    }
+
+    @Test
+    public void hostCreate() throws Exception{
+        //创建主机请求
+        ZabbixHostCreateRequest zabbixHostCreateRequest = new ZabbixHostCreateRequest();
+        //主机接口
+        ZabbixInterface zabbixInterface = new ZabbixInterface();
+        zabbixInterface.setIp("192.168.8.8").setPort("10086").setMain(1);
+        //主机标签
+        ZabbixTag zabbixTag = new ZabbixTag("a","b");
+
+        zabbixHostCreateRequest.setHost("demo_linux_server1")
+                .setGroupsIds("19").setTemplateIds("10343").setInterface(zabbixInterface).setProxyid("10398").setTags(zabbixTag)
+                .setPskIdentityAndPskPw("1233211234567", UUID.randomUUID().toString().replace("-",""));
+        ZabbixHostGenericResponse response = zabbixTemplate.hostCreate(zabbixHostCreateRequest);
+        response.getHostids().forEach(o ->{
+            try{
+                String json = mapper.writeValueAsString(o);
+                System.out.println(json);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        });
+    }
+
+    @Test
+    public void hostDelete()throws Exception{
+        ZabbixHostGenericResponse response = zabbixTemplate.hostDelete("10408");
+        System.out.println(response.getHostids().size());
+        response.getHostids().forEach(o->{
+            System.out.println(o);
+        });
+    }
+
+    @Test
+    public void hostUpdate()throws Exception{
+        ZabbixHostUpdateRequest zabbixHostUpdateRequest = new ZabbixHostUpdateRequest();
+        zabbixHostUpdateRequest.setHostid("10409");
+        zabbixHostUpdateRequest.setStatus(1);//1禁用 0启用
+        ZabbixHostGenericResponse zabbixHostGenericResponse = zabbixTemplate.hostUpdate(zabbixHostUpdateRequest);
+        System.out.println(zabbixHostGenericResponse.getHostids().size());
+        zabbixHostGenericResponse.getHostids().forEach(o->{
+            System.out.println(o);
+        });
+    }
+
+    @Test
+    public void hostInterfaceGet() throws Exception{
+        List<ZabbixHostGetResponse> resultList = zabbixTemplate.hostGet("test1");
+        List<ZabbixHostInterfaceGetResponse> resultList2 = zabbixTemplate.hostInterfaceGet(resultList.get(0).getHostid());
+//        List<ZabbixHostInterfaceGetResponse> resultList2 = zabbixTemplate.hostInterfaceGet("10408");
+        resultList2.forEach(o ->{
+            try{
+                String json = mapper.writeValueAsString(o);
+                System.out.println(json);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        });
+    }
+
+    @Test
+    public void templateGet() throws Exception{
+//        List<ZabbixTemplateGetResponse> resultList = zabbixTemplate.getTemplateByName("Linux by Zabbix agent active","Windows by Zabbix agent active","Generic Java JMX");
+        List<ZabbixTemplateGetResponse> resultList = zabbixTemplate.getTemplateByName("Template OS Windows by Zabbix agent active");
+//        List<ZabbixTemplateGetResponse> resultList = zabbixTemplate.getTemplateByHostids("10396","10084");
+
+        resultList.forEach(o ->{
+            try{
+                String json = mapper.writeValueAsString(o);
+                System.out.println(json);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        });
+    }
+
+    @Test
+    public void proxyGet() throws Exception{
+//        List<ZabbixProxyGetResponse> resultList = zabbixTemplate.proxyGetAll();
+        ZabbixProxyGetRequest zabbixProxyGetRequest = new ZabbixProxyGetRequest();
+        zabbixProxyGetRequest.setFilterHosts("zabbix_proxy01");
+        List<ZabbixProxyGetResponse> resultList = zabbixTemplate.proxyGet(zabbixProxyGetRequest);
+        resultList.forEach(o->{
+            try{
+                String json = mapper.writeValueAsString(o);
+                System.out.println(json);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        });
+    }
+
+    @Test
+    public void mediaType() throws Exception{
+        List<ZabbixMediaTypeGetResponse> resultList = zabbixTemplate.mediaTypeGet("Email (HTML)");
+        resultList.forEach(o->{
+            try{
+                String json = mapper.writeValueAsString(o);
+                System.out.println(json);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        });
+    }
+
+    @Test
+    public void userGroup() throws Exception{
+//        List<ZabbixUserGroupGetResponse> resultList = zabbixTemplate.userGroupGetById("7");
+        List<ZabbixUserGroupGetResponse> resultList = zabbixTemplate.userGroupGet();
+        resultList.forEach(o->{
+            try{
+                String json = mapper.writeValueAsString(o);
+                System.out.println(json);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        });
+    }
+
+    @Test
+    public void userGroupAdd() throws Exception{
+        ZabbixUserGroupCreateRequest zabbixUserGroupCreateRequest = new ZabbixUserGroupCreateRequest();
+        zabbixUserGroupCreateRequest.setName("demo").addReadOnlyHostGroup("18");
+        ZabbixUserGroupGenericResponse response = zabbixTemplate.userGroupCreate(zabbixUserGroupCreateRequest);
+        response.getUsrgrpids().forEach(o ->{
+            System.out.println(o);
+        });
+    }
 
 }
+
