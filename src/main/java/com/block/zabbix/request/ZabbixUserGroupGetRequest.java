@@ -9,6 +9,7 @@ public class ZabbixUserGroupGetRequest extends ZabbixGenericRequest{
 
     public ZabbixUserGroupGetRequest() {
         super();
+        this.params.put("output", "extend");
     }
 
     public ZabbixUserGroupGetRequest setStatus(int status){
