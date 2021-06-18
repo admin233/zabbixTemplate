@@ -688,7 +688,7 @@ public class ZabbixTemplate {
      */
     public List<ZabbixMediaTypeGetResponse> mediaTypeGet(String ... name){
         ZabbixMediaTypeRequest zabbixMediaTypeRequest = new ZabbixMediaTypeRequest();
-        zabbixMediaTypeRequest.setOutput("extend").setFilterNames(name);
+        zabbixMediaTypeRequest.setFilterNames(name);
         return this.mediaTypeGet(zabbixMediaTypeRequest);
     }
 
@@ -708,6 +708,36 @@ public class ZabbixTemplate {
         ZabbixResponse<List<ZabbixMediaTypeGetResponse>> result = response.getBody();
         printError(result);
         return result.getResult();
+    }
+
+    public List<ZabbixUserGroupGetResponse> userGroupGet(String ... names){
+        ZabbixUserGroupGetRequest zabbixUserGroupGetRequest = new ZabbixUserGroupGetRequest();
+        zabbixUserGroupGetRequest.setFilterNames(names);
+        return this.userGroupGet(zabbixUserGroupGetRequest);
+    }
+
+    public List<ZabbixUserGroupGetResponse> userGroupGetById(String ... ids){
+        ZabbixUserGroupGetRequest zabbixUserGroupGetRequest = new ZabbixUserGroupGetRequest();
+        zabbixUserGroupGetRequest.setUsrgrpids(ids);
+        return this.userGroupGet(zabbixUserGroupGetRequest);
+    }
+
+    public List<ZabbixUserGroupGetResponse> userGroupGet(ZabbixUserGroupGetRequest zabbixUserGroupGetRequest){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        ZabbixRequest<Map<String, Object>> dto = new ZabbixRequest<>();
+        dto.setJsonrpc(jsonrpc).setMethod("usergroup.get").setId(25).setAuth(getAuth())
+                .setParams(zabbixUserGroupGetRequest.getParams());
+
+        HttpEntity<ZabbixRequest<Map<String, Object>>> request = new HttpEntity<>(dto, headers);
+        ResponseEntity<ZabbixResponse<List<ZabbixUserGroupGetResponse>>> response = restTemplate.exchange(url, POST,
+                request, new ParameterizedTypeReference<ZabbixResponse<List<ZabbixUserGroupGetResponse>>>() {
+                });
+
+        ZabbixResponse<List<ZabbixUserGroupGetResponse>> result = response.getBody();
+        printError(result);
+        return result.getResult();
+
     }
 
     public String getAuth() {
