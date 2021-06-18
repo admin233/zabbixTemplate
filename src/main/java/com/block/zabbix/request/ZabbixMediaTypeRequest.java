@@ -11,11 +11,6 @@ public class ZabbixMediaTypeRequest extends ZabbixGenericRequest{
         super();
     }
 
-    public ZabbixMediaTypeRequest setOutput(String output) {
-        this.params.put("output", output);
-        return this;
-    }
-
     public ZabbixMediaTypeRequest setFilterNames(String... names) {
         return this.setFilterNames(Arrays.asList(names));
     }

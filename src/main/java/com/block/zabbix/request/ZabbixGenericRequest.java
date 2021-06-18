@@ -7,6 +7,7 @@ public class ZabbixGenericRequest {
 	public Map<String, Object> params = new HashMap<>();
 
 	public ZabbixGenericRequest() {
+		this.params.put("output", "extend");
 	}
 
 	public ZabbixGenericRequest(String fieldName, Object fieldValue) {
@@ -20,5 +21,10 @@ public class ZabbixGenericRequest {
 
 	public Map<String, Object> getParams() {
 		return params;
+	}
+
+	public ZabbixGenericRequest setOutput(String output) {
+		this.params.put("output", output);
+		return this;
 	}
 }
