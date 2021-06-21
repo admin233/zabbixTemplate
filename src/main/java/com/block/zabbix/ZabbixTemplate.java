@@ -776,6 +776,24 @@ public class ZabbixTemplate {
         return result.getResult();
     }
 
+    public ZabbixUserGroupGenericResponse userGroupUpdate(ZabbixUserGroupUpdateRequest zabbixUserGroupUpdateRequest) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        ZabbixRequest<Map<String, Object>> dto = new ZabbixRequest<>();
+        dto.setJsonrpc(jsonrpc).setMethod("usergroup.update").setId(28).setAuth(getAuth())
+                .setParams(zabbixUserGroupUpdateRequest.getParams());
+
+        HttpEntity<ZabbixRequest<Map<String, Object>>> request = new HttpEntity<>(dto, headers);
+        ResponseEntity<ZabbixResponse<ZabbixUserGroupGenericResponse>> response = restTemplate.exchange(url, POST, request,
+                new ParameterizedTypeReference<ZabbixResponse<ZabbixUserGroupGenericResponse>>() {
+                });
+
+        ZabbixResponse<ZabbixUserGroupGenericResponse> result = response.getBody();
+        printError(result);
+        return result.getResult();
+    }
+
     public String getAuth() {
         if (this.auth == null) {
             this.auth = this.userLogin(this.user, this.password);
