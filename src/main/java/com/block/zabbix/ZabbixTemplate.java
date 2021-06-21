@@ -811,6 +811,40 @@ public class ZabbixTemplate {
         return result.getResult();
     }
 
+    public ZabbixUserGenericResponse userCreate(ZabbixUserCreateRequest zabbixUserCreateRequest){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        ZabbixRequest<Map<String, Object>> dto = new ZabbixRequest<>();
+        dto.setJsonrpc(jsonrpc).setMethod("user.create").setId(30).setAuth(getAuth())
+                .setParams(zabbixUserCreateRequest.getParams());
+
+        HttpEntity<ZabbixRequest<Map<String, Object>>> request = new HttpEntity<>(dto, headers);
+        ResponseEntity<ZabbixResponse<ZabbixUserGenericResponse>> response = restTemplate.exchange(url, POST,
+                request, new ParameterizedTypeReference<ZabbixResponse<ZabbixUserGenericResponse>>() {
+                });
+        ZabbixResponse<ZabbixUserGenericResponse> result = response.getBody();
+        printError(result);
+        return result.getResult();
+    }
+
+    public ZabbixUserGenericResponse userDel(ZabbixUserDelRequest zabbixUserDelRequest){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        ZabbixRequest<List<String>> dto = new ZabbixRequest<>();
+        dto.setJsonrpc(jsonrpc).setMethod("user.delete").setId(31).setAuth(getAuth())
+                .setParams(zabbixUserDelRequest.getParams());
+
+        HttpEntity<ZabbixRequest<List<String>>> request = new HttpEntity<>(dto, headers);
+        ResponseEntity<ZabbixResponse<ZabbixUserGenericResponse>> response = restTemplate.exchange(url, POST, request,
+                new ParameterizedTypeReference<ZabbixResponse<ZabbixUserGenericResponse>>() {
+                });
+
+        ZabbixResponse<ZabbixUserGenericResponse> result = response.getBody();
+        printError(result);
+        return result.getResult();
+    }
+
     public List<ZabbixUserGetResponse> userGet(String ... names){
         ZabbixUserGetRequest zabbixUserGetRequest = new ZabbixUserGetRequest();
         zabbixUserGetRequest.setFilterNames(names);
