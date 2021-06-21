@@ -845,6 +845,24 @@ public class ZabbixTemplate {
         return result.getResult();
     }
 
+    public ZabbixUserGenericResponse userUpdate(ZabbixUserUpdateRequest zabbixUserUpdateRequest){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        ZabbixRequest<Map<String, Object>> dto = new ZabbixRequest<>();
+        dto.setJsonrpc(jsonrpc).setMethod("user.update").setId(32).setAuth(getAuth())
+                .setParams(zabbixUserUpdateRequest.getParams());
+
+        HttpEntity<ZabbixRequest<Map<String, Object>>> request = new HttpEntity<>(dto, headers);
+        ResponseEntity<ZabbixResponse<ZabbixUserGenericResponse>> response = restTemplate.exchange(url, POST, request,
+                new ParameterizedTypeReference<ZabbixResponse<ZabbixUserGenericResponse>>() {
+                });
+
+        ZabbixResponse<ZabbixUserGenericResponse> result = response.getBody();
+        printError(result);
+        return result.getResult();
+    }
+
     public List<ZabbixUserGetResponse> userGet(String ... names){
         ZabbixUserGetRequest zabbixUserGetRequest = new ZabbixUserGetRequest();
         zabbixUserGetRequest.setFilterNames(names);
