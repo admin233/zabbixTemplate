@@ -794,6 +794,35 @@ public class ZabbixTemplate {
         return result.getResult();
     }
 
+    public List<ZabbixUserGetResponse> userGet(ZabbixUserGetRequest zabbixUserGetRequest){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        ZabbixRequest<Map<String, Object>> dto = new ZabbixRequest<>();
+        dto.setJsonrpc(jsonrpc).setMethod("user.get").setId(29).setAuth(getAuth())
+                .setParams(zabbixUserGetRequest.getParams());
+
+        HttpEntity<ZabbixRequest<Map<String, Object>>> request = new HttpEntity<>(dto, headers);
+        ResponseEntity<ZabbixResponse<List<ZabbixUserGetResponse>>> response = restTemplate.exchange(url, POST,
+                request, new ParameterizedTypeReference<ZabbixResponse<List<ZabbixUserGetResponse>>>() {
+                });
+
+        ZabbixResponse<List<ZabbixUserGetResponse>> result = response.getBody();
+        printError(result);
+        return result.getResult();
+    }
+
+    public List<ZabbixUserGetResponse> userGet(String ... names){
+        ZabbixUserGetRequest zabbixUserGetRequest = new ZabbixUserGetRequest();
+        zabbixUserGetRequest.setFilterNames(names);
+        return this.userGet(zabbixUserGetRequest);
+    }
+
+    public List<ZabbixUserGetResponse> userGetByAlias(String ... alias){
+        ZabbixUserGetRequest zabbixUserGetRequest = new ZabbixUserGetRequest();
+        zabbixUserGetRequest.setFilterAlias(alias);
+        return this.userGet(zabbixUserGetRequest);
+    }
+
     public String getAuth() {
         if (this.auth == null) {
             this.auth = this.userLogin(this.user, this.password);
