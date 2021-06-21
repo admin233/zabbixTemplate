@@ -3,10 +3,8 @@ package src;
 import com.block.zabbix.ZabbixTemplate;
 import com.block.zabbix.pojo.ZabbixInterface;
 import com.block.zabbix.pojo.ZabbixTag;
-import com.block.zabbix.request.ZabbixHostCreateRequest;
-import com.block.zabbix.request.ZabbixHostUpdateRequest;
-import com.block.zabbix.request.ZabbixProxyGetRequest;
-import com.block.zabbix.request.ZabbixUserGroupCreateRequest;
+import com.block.zabbix.pojo.ZabbixUserMedia;
+import com.block.zabbix.request.*;
 import com.block.zabbix.response.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
@@ -217,7 +215,7 @@ public class ZabbixTemplateTest {
     }
 
     @Test
-    public void userGroup() throws Exception{
+    public void userGroupGet() throws Exception{
 //        List<ZabbixUserGroupGetResponse> resultList = zabbixTemplate.userGroupGetById("7");
         List<ZabbixUserGroupGetResponse> resultList = zabbixTemplate.userGroupGet();
         resultList.forEach(o->{
@@ -238,6 +236,79 @@ public class ZabbixTemplateTest {
         response.getUsrgrpids().forEach(o ->{
             System.out.println(o);
         });
+    }
+
+    @Test
+    public void userGroupDel() throws Exception{
+        ZabbixUserGroupDelRequest zabbixUserGroupDelRequest = new ZabbixUserGroupDelRequest("14");
+        zabbixUserGroupDelRequest.add("13");
+        ZabbixUserGroupGenericResponse response = zabbixTemplate.userGroupDel(zabbixUserGroupDelRequest);
+        response.getUsrgrpids().forEach(o ->{
+            System.out.println(o);
+        });
+    }
+
+    @Test
+    public void userGroupUpdate() throws Exception{
+        ZabbixUserGroupUpdateRequest zabbixUserGroupUpdateRequest = new ZabbixUserGroupUpdateRequest("14");
+        zabbixUserGroupUpdateRequest.setUsers_status(0).setName("demo").addReadOnlyHostGroup("18");
+        ZabbixUserGroupGenericResponse response = zabbixTemplate.userGroupUpdate(zabbixUserGroupUpdateRequest);
+        response.getUsrgrpids().forEach(o ->{
+            System.out.println(o);
+        });
+    }
+
+    @Test
+    public void userGet() throws Exception{
+        List<ZabbixUserGetResponse> responset = zabbixTemplate.userGetByAlias("demo");
+        responset.forEach(o -> {
+            try {
+                String json = mapper.writeValueAsString(o);
+                System.out.println(json);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        });
+    }
+
+    @Test
+    public void userCreate() throws Exception{
+        ZabbixUserMedia<List<String>> zabbixUserMedia = new ZabbixUserMedia<List<String>>();
+        zabbixUserMedia.setMediatypeid("4");
+        List<String> list = new ArrayList<>();
+        list.add("abc@abvv.com");
+        zabbixUserMedia.setSendto(list);
+
+        ZabbixUserCreateRequest request = new ZabbixUserCreateRequest();
+        request.setAlias("demo").setPasswd("123456").setUsrgrps("14").setUser_medias(zabbixUserMedia);
+        ZabbixUserGenericResponse response = zabbixTemplate.userCreate(request);
+        String json = mapper.writeValueAsString(response);
+        System.out.println(json);
+    }
+
+    @Test
+    public void userDel() throws Exception{
+        ZabbixUserDelRequest request = new ZabbixUserDelRequest("5");
+        ZabbixUserGenericResponse response = zabbixTemplate.userDel(request);
+        String json = mapper.writeValueAsString(response);
+        System.out.println(json);
+    }
+
+    @Test
+    public void userUpdate() throws Exception{
+        ZabbixUserMedia<List<String>> zabbixUserMedia = new ZabbixUserMedia<List<String>>();
+        zabbixUserMedia.setMediatypeid("4");
+        List<String> list = new ArrayList<>();
+        list.add("abc@abvv.com");
+        zabbixUserMedia.setSendto(list);
+
+        ZabbixUserUpdateRequest request = new ZabbixUserUpdateRequest("6");
+//        request.setUser_medias(zabbixUserMedia);
+        request.setUsrgrps("15");
+        ZabbixUserGenericResponse response = zabbixTemplate.userUpdate(request);
+        String json = mapper.writeValueAsString(response);
+        System.out.println(json);
+
     }
 
 }
