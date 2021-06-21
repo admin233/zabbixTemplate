@@ -758,6 +758,24 @@ public class ZabbixTemplate {
         return result.getResult();
     }
 
+    public ZabbixUserGroupGenericResponse userGroupDel(ZabbixUserGroupDelRequest zabbixUserGroupDelRequest){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        ZabbixRequest<List<String>> dto = new ZabbixRequest<>();
+        dto.setJsonrpc(jsonrpc).setMethod("usergroup.delete").setId(27).setAuth(getAuth())
+                .setParams(zabbixUserGroupDelRequest.getParams());
+
+        HttpEntity<ZabbixRequest<List<String>>> request = new HttpEntity<>(dto, headers);
+        ResponseEntity<ZabbixResponse<ZabbixUserGroupGenericResponse>> response = restTemplate.exchange(url, POST, request,
+                new ParameterizedTypeReference<ZabbixResponse<ZabbixUserGroupGenericResponse>>() {
+                });
+
+        ZabbixResponse<ZabbixUserGroupGenericResponse> result = response.getBody();
+        printError(result);
+        return result.getResult();
+    }
+
     public String getAuth() {
         if (this.auth == null) {
             this.auth = this.userLogin(this.user, this.password);
