@@ -1,5 +1,6 @@
 package com.block.zabbix.request;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,8 +23,8 @@ public class ZabbixGenericRequest {
 		return params;
 	}
 
-	public ZabbixGenericRequest setOutput(String output) {
-		this.params.put("output", output);
+	public ZabbixGenericRequest setOutput(String ... output) {
+		this.params.put("output", Arrays.asList(output));
 		return this;
 	}
 }
