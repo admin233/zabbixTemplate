@@ -10,6 +10,10 @@ public class ZabbixUserUpdateRequest extends ZabbixGenericRequest{
         super("userid",userid);
     }
 
+    public ZabbixUserUpdateRequest(int userid) {
+        super("userid",String.valueOf(userid));
+    }
+
     /**
      * (required)
      * @param userid
@@ -17,6 +21,11 @@ public class ZabbixUserUpdateRequest extends ZabbixGenericRequest{
      */
     public ZabbixUserUpdateRequest setUserid(String userid){
         this.params.put("userid",userid);
+        return this;
+    }
+
+    public ZabbixUserUpdateRequest setUserid(int userid){
+        this.params.put("userid",String.valueOf(userid));
         return this;
     }
 
