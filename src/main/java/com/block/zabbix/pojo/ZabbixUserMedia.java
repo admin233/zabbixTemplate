@@ -33,6 +33,28 @@ public class ZabbixUserMedia<T> {
         this.setPeriod("1-7,00:00-24:00");
     }
 
+    public ZabbixUserMedia(String mediatypeid) {
+        this();
+        this.mediatypeid=mediatypeid;
+    }
+
+    public ZabbixUserMedia(int mediatypeid) {
+        this();
+        this.mediatypeid = String.valueOf(mediatypeid);
+    }
+
+    public ZabbixUserMedia(String mediatypeid,T sendto) {
+        this();
+        this.mediatypeid = mediatypeid;
+        this.sendto = sendto;
+    }
+
+    public ZabbixUserMedia(int mediatypeid,T sendto) {
+        this();
+        this.mediatypeid = String.valueOf(mediatypeid);
+        this.sendto = sendto;
+    }
+
     public String getMediatypeid() {
         return mediatypeid;
     }
