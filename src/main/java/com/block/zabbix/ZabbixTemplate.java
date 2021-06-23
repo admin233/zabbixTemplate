@@ -5,6 +5,7 @@ import com.block.zabbix.api.ZabbixResponse;
 import com.block.zabbix.pojo.ZabbixUserLogin;
 import com.block.zabbix.request.*;
 import com.block.zabbix.request.action.ZabbixActionCreateRequest;
+import com.block.zabbix.request.action.ZabbixActionDelRequest;
 import com.block.zabbix.request.action.ZabbixActionGetRequest;
 import com.block.zabbix.response.*;
 import com.block.zabbix.response.action.ZabbixActionGenericResponse;
@@ -916,6 +917,29 @@ public class ZabbixTemplate {
         ZabbixResponse<ZabbixActionGenericResponse> result = response.getBody();
         printError(result);
         return result.getResult();
+    }
+
+    public ZabbixActionGenericResponse actionDel(ZabbixActionDelRequest zabbixActionDelRequest){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        ZabbixRequest<List<String>> dto = new ZabbixRequest<>();
+        dto.setJsonrpc(jsonrpc).setMethod("action.delete").setId(35).setAuth(getAuth())
+                .setParams(zabbixActionDelRequest.getParams());
+
+        HttpEntity<ZabbixRequest<List<String>>> request = new HttpEntity<>(dto, headers);
+        ResponseEntity<ZabbixResponse<ZabbixActionGenericResponse>> response = restTemplate.exchange(url, POST, request,
+                new ParameterizedTypeReference<ZabbixResponse<ZabbixActionGenericResponse>>() {
+                });
+
+        ZabbixResponse<ZabbixActionGenericResponse> result = response.getBody();
+        printError(result);
+        return result.getResult();
+    }
+
+    public ZabbixActionGenericResponse actionDel(String ... actionids){
+        ZabbixActionDelRequest request = new ZabbixActionDelRequest(actionids);
+        return actionDel(request);
     }
 
     public String getAuth() {
