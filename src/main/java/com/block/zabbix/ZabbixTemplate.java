@@ -4,8 +4,10 @@ import com.block.zabbix.api.ZabbixRequest;
 import com.block.zabbix.api.ZabbixResponse;
 import com.block.zabbix.pojo.ZabbixUserLogin;
 import com.block.zabbix.request.*;
+import com.block.zabbix.request.action.ZabbixActionCreateRequest;
 import com.block.zabbix.request.action.ZabbixActionGetRequest;
 import com.block.zabbix.response.*;
+import com.block.zabbix.response.action.ZabbixActionGenericResponse;
 import com.block.zabbix.response.action.get.ZabbixActionsGetResponse;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
@@ -898,6 +900,22 @@ public class ZabbixTemplate {
         ZabbixActionGetRequest request = new ZabbixActionGetRequest();
         request.setFilterName(name).setFilterEventsource(0);
         return this.actionGet(request);
+    }
+
+    public ZabbixActionGenericResponse actionCreate(ZabbixActionCreateRequest zabbixActionCreateRequest){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        ZabbixRequest<Map<String, Object>> dto = new ZabbixRequest<>();
+        dto.setJsonrpc(jsonrpc).setMethod("action.create").setId(34).setAuth(getAuth())
+                .setParams(zabbixActionCreateRequest.getParams());
+        HttpEntity<ZabbixRequest<Map<String, Object>>> request = new HttpEntity<>(dto, headers);
+        ResponseEntity<ZabbixResponse<ZabbixActionGenericResponse>> response = restTemplate.exchange(url, POST, request,
+                new ParameterizedTypeReference<ZabbixResponse<ZabbixActionGenericResponse>>() {
+                });
+
+        ZabbixResponse<ZabbixActionGenericResponse> result = response.getBody();
+        printError(result);
+        return result.getResult();
     }
 
     public String getAuth() {
