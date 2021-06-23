@@ -1,7 +1,5 @@
 package com.block.zabbix.pojo.action;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.List;
 
 /**
@@ -19,7 +17,6 @@ public class ActionFilter {
      * 2 - or;
      * 3 - 自定义表达式。
      */
-    @JsonProperty("evaltype")
     public int evaltype;
 
     /**
@@ -27,14 +24,12 @@ public class ActionFilter {
      * 表达式必须包含通过其“formulaid”引用特定筛选条件的id。
      * 表达式中使用的id必须与过滤器条件中定义的id完全匹配；
      */
-    @JsonProperty("formula")
     public String formula;
 
     /**
      * 用于筛选结果的筛选条件集
      * (必要)
      */
-    @JsonProperty("conditions")
     public List<ActionFilterCondition> conditions;
 
     /**
@@ -44,7 +39,37 @@ public class ActionFilter {
      *
      * 必要 自定义表达式过滤器。
      */
-    @JsonProperty("eval_formula")
     public String evalFormula;
 
+    public int getEvaltype() {
+        return evaltype;
+    }
+
+    public void setEvaltype(int evaltype) {
+        this.evaltype = evaltype;
+    }
+
+    public String getFormula() {
+        return formula;
+    }
+
+    public void setFormula(String formula) {
+        this.formula = formula;
+    }
+
+    public List<ActionFilterCondition> getConditions() {
+        return conditions;
+    }
+
+    public void setConditions(List<ActionFilterCondition> conditions) {
+        this.conditions = conditions;
+    }
+
+    public String getEvalFormula() {
+        return evalFormula;
+    }
+
+    public void setEvalFormula(String evalFormula) {
+        this.evalFormula = evalFormula;
+    }
 }
