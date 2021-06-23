@@ -3,6 +3,7 @@ package com.block.zabbix.pojo.action;
 /**
  * 动作操作条件
  * 动作操作条件对象定义了一个必须满足的条件来执行当前操作。
+ * The action operation condition object defines a condition that must be met to perform the current operation. It has the following properties.
  */
 public class ActionOperationCondition {
     /**
@@ -45,6 +46,13 @@ public class ActionOperationCondition {
      * 1 - 已确认。
      */
     int operator;
+
+    public ActionOperationCondition(int conditiontype, String value, String operationid, int operator) {
+        this.conditiontype = conditiontype;
+        this.value = value;
+        this.operationid = operationid;
+        this.operator = operator;
+    }
 
     public String getOpconditionid() {
         return opconditionid;
