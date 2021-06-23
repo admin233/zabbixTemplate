@@ -6,6 +6,7 @@ import com.block.zabbix.pojo.action.ActionRecoveryOperation;
 import com.block.zabbix.request.ZabbixGenericRequest;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class ZabbixActionCreateRequest extends ZabbixGenericRequest {
 
@@ -78,7 +79,11 @@ public class ZabbixActionCreateRequest extends ZabbixGenericRequest {
      * 	为动作创建的动作操作。
      */
     public ZabbixActionCreateRequest setOperations(ActionOperations... operations){
-        addField("operations", Arrays.asList(operations));
+        return setOperations(Arrays.asList(operations));
+    }
+
+    public ZabbixActionCreateRequest setOperations(List<ActionOperations> operations){
+        addField("operations", operations);
         return this;
     }
 
@@ -86,7 +91,11 @@ public class ZabbixActionCreateRequest extends ZabbixGenericRequest {
      * 	为动作创建动作恢复操作。
      */
     public ZabbixActionCreateRequest setRecovery_operations(ActionRecoveryOperation ... recovery_operations){
-        addField("recovery_operations", Arrays.asList(recovery_operations));
+        return setRecovery_operations(Arrays.asList(recovery_operations));
+    }
+
+    public ZabbixActionCreateRequest setRecovery_operations(List<ActionRecoveryOperation> recovery_operations){
+        addField("recovery_operations", recovery_operations);
         return this;
     }
 
@@ -95,7 +104,11 @@ public class ZabbixActionCreateRequest extends ZabbixGenericRequest {
      * 	TODO:acknowledge_operations
      */
     public ZabbixActionCreateRequest setAcknowledge_operations(Object... acknowledge_operations){
-        addField("acknowledge_operations", Arrays.asList(acknowledge_operations));
+        return setAcknowledge_operations(Arrays.asList(acknowledge_operations));
+    }
+
+    public ZabbixActionCreateRequest setAcknowledge_operations(List<Object> acknowledge_operations){
+        addField("acknowledge_operations", acknowledge_operations);
         return this;
     }
 
