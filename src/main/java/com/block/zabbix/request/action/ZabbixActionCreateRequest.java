@@ -2,6 +2,7 @@ package com.block.zabbix.request.action;
 
 import com.block.zabbix.pojo.action.ActionFilter;
 import com.block.zabbix.pojo.action.ActionOperations;
+import com.block.zabbix.pojo.action.ActionRecoveryOperation;
 import com.block.zabbix.request.ZabbixGenericRequest;
 
 import java.util.Arrays;
@@ -83,9 +84,8 @@ public class ZabbixActionCreateRequest extends ZabbixGenericRequest {
 
     /**
      * 	为动作创建动作恢复操作。
-     * 	TODO:recovery_operations
      */
-    public ZabbixActionCreateRequest setRecovery_operations(Object... recovery_operations){
+    public ZabbixActionCreateRequest setRecovery_operations(ActionRecoveryOperation ... recovery_operations){
         addField("recovery_operations", Arrays.asList(recovery_operations));
         return this;
     }
