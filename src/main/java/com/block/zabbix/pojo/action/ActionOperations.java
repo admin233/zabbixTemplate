@@ -153,12 +153,6 @@ public class ActionOperations {
      *
      * 需要有 “Set host inventory mode” 操作。
      */
-    public Object ActionOpinventory;
-
-
-
-
-
-
+    public ActionOpinventory ActionOpinventory;
 
 }
