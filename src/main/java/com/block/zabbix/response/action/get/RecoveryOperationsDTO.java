@@ -1,6 +1,5 @@
 package com.block.zabbix.response.action.get;
 
-import com.block.zabbix.pojo.action.ActionOperationCondition;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
@@ -49,7 +48,7 @@ public class RecoveryOperationsDTO {
      * 用于触发动作的操作条件
      */
     @JsonProperty("opconditions")
-    public List<ActionOperationCondition> opconditions;
+    public List<ActionOperationConditionDTO> opconditions;
     /**
      * 对象，该对象包含有关恢复操作发送的消息的数据。
      * 操作消息对象是 described in detail above.
