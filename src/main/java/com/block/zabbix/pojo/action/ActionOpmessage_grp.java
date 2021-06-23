@@ -1,5 +1,7 @@
 package com.block.zabbix.pojo.action;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 /**
  * User groups to send messages to.
  *
@@ -9,6 +11,7 @@ package com.block.zabbix.pojo.action;
  *
  * Required for message operations if opmessage_usr is not set.
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ActionOpmessage_grp {
 
     String operationid;

@@ -1,11 +1,14 @@
 package com.block.zabbix.pojo.action;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.util.List;
 
 /**
  * 动作过滤
  * action filter 对象定义执行配置的操作必须满足的一组条件。它具有以下属性。
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ActionFilter {
 
     /**
@@ -39,7 +42,7 @@ public class ActionFilter {
      *
      * 必要 自定义表达式过滤器。
      */
-    public String evalFormula;
+    public String eval_formula;
 
     public int getEvaltype() {
         return evaltype;
@@ -65,11 +68,11 @@ public class ActionFilter {
         this.conditions = conditions;
     }
 
-    public String getEvalFormula() {
-        return evalFormula;
+    public String getEval_formula() {
+        return eval_formula;
     }
 
-    public void setEvalFormula(String evalFormula) {
-        this.evalFormula = evalFormula;
+    public void setEval_formula(String eval_formula) {
+        this.eval_formula = eval_formula;
     }
 }

@@ -1,8 +1,11 @@
 package com.block.zabbix.pojo.action;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 /**
  * 动作过滤条件对象定义在运行操作动作之前必须检查的特定条件。
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ActionFilterCondition {
 
     /**
@@ -89,6 +92,18 @@ public class ActionFilterCondition {
      * 7 - not in.
      */
     public int operator;
+
+    public ActionFilterCondition() {
+        super();
+    }
+
+    public ActionFilterCondition(int conditiontype,int operator,String value,String formulaid) {
+        super();
+        this.conditiontype=conditiontype;
+        this.operator=operator;
+        this.value=value;
+        this.formulaid=formulaid;
+    }
 
     public String getConditionid() {
         return conditionid;

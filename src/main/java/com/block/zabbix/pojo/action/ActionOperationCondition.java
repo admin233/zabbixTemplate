@@ -47,10 +47,9 @@ public class ActionOperationCondition {
      */
     int operator;
 
-    public ActionOperationCondition(int conditiontype, String value, String operationid, int operator) {
+    public ActionOperationCondition(int conditiontype, String value, int operator) {
         this.conditiontype = conditiontype;
         this.value = value;
-        this.operationid = operationid;
         this.operator = operator;
     }
 

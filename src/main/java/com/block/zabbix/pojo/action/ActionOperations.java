@@ -1,11 +1,14 @@
 package com.block.zabbix.pojo.action;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.util.List;
 
 /**
  * 动作操作
  * 动作操作对象定义执行动作时执行的操作。
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ActionOperations {
 
     /**
@@ -155,4 +158,139 @@ public class ActionOperations {
      */
     public ActionOpinventory ActionOpinventory;
 
+    public String getOperationid() {
+        return operationid;
+    }
+
+    public void setOperationid(String operationid) {
+        this.operationid = operationid;
+    }
+
+    public int getOperationtype() {
+        return operationtype;
+    }
+
+    public void setOperationtype(int operationtype) {
+        this.operationtype = operationtype;
+    }
+
+    public String getActionid() {
+        return actionid;
+    }
+
+    public void setActionid(String actionid) {
+        this.actionid = actionid;
+    }
+
+    public String getEsc_period() {
+        return esc_period;
+    }
+
+    public void setEsc_period(String esc_period) {
+        this.esc_period = esc_period;
+    }
+
+    public int getEsc_step_from() {
+        return esc_step_from;
+    }
+
+    public void setEsc_step_from(int esc_step_from) {
+        this.esc_step_from = esc_step_from;
+    }
+
+    public int getEsc_step_to() {
+        return esc_step_to;
+    }
+
+    public void setEsc_step_to(int esc_step_to) {
+        this.esc_step_to = esc_step_to;
+    }
+
+    public int getEvaltype() {
+        return evaltype;
+    }
+
+    public void setEvaltype(int evaltype) {
+        this.evaltype = evaltype;
+    }
+
+    public ActionOperationCommand getOpcommand() {
+        return opcommand;
+    }
+
+    public void setOpcommand(ActionOperationCommand opcommand) {
+        this.opcommand = opcommand;
+    }
+
+    public List<ActionOpcommand_grp> getOpcommand_grp() {
+        return opcommand_grp;
+    }
+
+    public void setOpcommand_grp(List<ActionOpcommand_grp> opcommand_grp) {
+        this.opcommand_grp = opcommand_grp;
+    }
+
+    public List<ActionOpcommand_hst> getOpcommand_hst() {
+        return opcommand_hst;
+    }
+
+    public void setOpcommand_hst(List<ActionOpcommand_hst> opcommand_hst) {
+        this.opcommand_hst = opcommand_hst;
+    }
+
+    public List<ActionOperationCondition> getOpconditions() {
+        return opconditions;
+    }
+
+    public void setOpconditions(List<ActionOperationCondition> opconditions) {
+        this.opconditions = opconditions;
+    }
+
+    public List<ActionOpgroup> getOpgroup() {
+        return opgroup;
+    }
+
+    public void setOpgroup(List<ActionOpgroup> opgroup) {
+        this.opgroup = opgroup;
+    }
+
+    public ActionOperationMessage getOpmessage() {
+        return opmessage;
+    }
+
+    public void setOpmessage(ActionOperationMessage opmessage) {
+        this.opmessage = opmessage;
+    }
+
+    public List<ActionOpmessage_grp> getOpmessage_grp() {
+        return opmessage_grp;
+    }
+
+    public void setOpmessage_grp(List<ActionOpmessage_grp> opmessage_grp) {
+        this.opmessage_grp = opmessage_grp;
+    }
+
+    public List<ActionOpmessage_usr> getOpmessage_usr() {
+        return opmessage_usr;
+    }
+
+    public void setOpmessage_usr(List<ActionOpmessage_usr> opmessage_usr) {
+        this.opmessage_usr = opmessage_usr;
+    }
+
+    public List<ActionOptemplate> getOptemplate() {
+        return optemplate;
+    }
+
+    public void setOptemplate(List<ActionOptemplate> optemplate) {
+        this.optemplate = optemplate;
+    }
+
+    public com.block.zabbix.pojo.action.ActionOpinventory getActionOpinventory() {
+        return ActionOpinventory;
+    }
+
+    public void setActionOpinventory(com.block.zabbix.pojo.action.ActionOpinventory actionOpinventory) {
+        ActionOpinventory = actionOpinventory;
+    }
 }

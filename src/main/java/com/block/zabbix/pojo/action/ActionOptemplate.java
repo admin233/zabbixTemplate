@@ -1,5 +1,7 @@
 package com.block.zabbix.pojo.action;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 /**
  * Templates to link the hosts to to.
  *
@@ -9,6 +11,7 @@ package com.block.zabbix.pojo.action;
  *
  * Required for “link to template” and “unlink from template” operations.
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ActionOptemplate {
 
     String operationid;

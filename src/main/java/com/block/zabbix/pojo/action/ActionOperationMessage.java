@@ -1,8 +1,11 @@
 package com.block.zabbix.pojo.action;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 /**
  * The operation message object contains data about the message that will be sent by the operation.
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ActionOperationMessage {
     /**
      * Whether to use the default action message text and subject.

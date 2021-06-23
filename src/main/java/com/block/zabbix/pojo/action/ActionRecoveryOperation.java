@@ -1,5 +1,7 @@
 package com.block.zabbix.pojo.action;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.util.List;
 
 /**
@@ -7,6 +9,7 @@ import java.util.List;
  * Recovery operations are possible for
  * trigger actions and internal actions.
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ActionRecoveryOperation {
     /**
      * (readonly) ID of the action operation.

@@ -1,5 +1,7 @@
 package com.block.zabbix.pojo.action;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 /**
  * Inventory mode set host to.
  *
@@ -9,6 +11,7 @@ package com.block.zabbix.pojo.action;
  *
  * Required for “Set host inventory mode” operations.
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ActionOpinventory {
 
     String operationid;

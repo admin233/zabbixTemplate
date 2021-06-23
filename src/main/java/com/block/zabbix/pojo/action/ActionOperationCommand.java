@@ -1,10 +1,13 @@
 package com.block.zabbix.pojo.action;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 /**
  * 动作操作命令
  * 操作命令对象包含有关运行操作命令的数据。
  * The operation command object contains data about the command that will be run by the operation.
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ActionOperationCommand {
     /**
      * Command to run. Required when type IN (0,1,2,3)

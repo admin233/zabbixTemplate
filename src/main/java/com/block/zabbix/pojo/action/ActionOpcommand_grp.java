@@ -1,5 +1,7 @@
 package com.block.zabbix.pojo.action;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 /**
  * Host groups to run remote commands on.
  *
@@ -10,6 +12,7 @@ package com.block.zabbix.pojo.action;
  *
  * Required for remote command operations if opcommand_hst is not set.
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ActionOpcommand_grp extends ActionOpgroup{
 
     String opcommand_grpid;

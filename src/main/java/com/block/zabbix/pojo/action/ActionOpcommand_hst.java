@@ -1,5 +1,7 @@
 package com.block.zabbix.pojo.action;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 /**
  * Host to run remote commands on.
  *
@@ -10,6 +12,7 @@ package com.block.zabbix.pojo.action;
  *
  * Required for remote command operations if opcommand_grp is not set.
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ActionOpcommand_hst {
     String opcommand_hstid;
     String operationid;
