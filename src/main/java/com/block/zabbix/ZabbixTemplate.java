@@ -938,6 +938,23 @@ public class ZabbixTemplate {
         return result.getResult();
     }
 
+    public List<ZabbixAlertGetResponse> alertGet(ZabbixAlertGetRequest zabbixAlertGetRequest){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        ZabbixRequest<Map<String, Object>> dto = new ZabbixRequest<>();
+        dto.setJsonrpc(jsonrpc).setMethod("alert.get").setId(36).setAuth(getAuth())
+                .setParams(zabbixAlertGetRequest.getParams());
+        HttpEntity<ZabbixRequest<Map<String, Object>>> request = new HttpEntity<>(dto, headers);
+        ResponseEntity<ZabbixResponse<List<ZabbixAlertGetResponse>>> response = restTemplate.exchange(url, POST, request,
+                new ParameterizedTypeReference<ZabbixResponse<List<ZabbixAlertGetResponse>>>() {
+                });
+
+        ZabbixResponse<List<ZabbixAlertGetResponse>> result = response.getBody();
+        printError(result);
+        return result.getResult();
+    }
+
     public ZabbixActionGenericResponse actionDel(String ... actionids){
         ZabbixActionDelRequest request = new ZabbixActionDelRequest(actionids);
         return actionDel(request);
