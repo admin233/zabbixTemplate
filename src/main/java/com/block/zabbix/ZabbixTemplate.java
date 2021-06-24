@@ -978,6 +978,35 @@ public class ZabbixTemplate {
         return result.getResult();
     }
 
+    public List<ZabbixEventGetResponse> eventGet(ZabbixEventGetRequest zabbixEventGetRequest){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        ZabbixRequest<Map<String, Object>> dto = new ZabbixRequest<>();
+        dto.setJsonrpc(jsonrpc).setMethod("event.get").setId(37).setAuth(getAuth())
+                .setParams(zabbixEventGetRequest.getParams());
+        HttpEntity<ZabbixRequest<Map<String, Object>>> request = new HttpEntity<>(dto, headers);
+        ResponseEntity<ZabbixResponse<List<ZabbixEventGetResponse>>> response = restTemplate.exchange(url, POST, request,
+                new ParameterizedTypeReference<ZabbixResponse<List<ZabbixEventGetResponse>>>() {
+                });
+
+        ZabbixResponse<List<ZabbixEventGetResponse>> result = response.getBody();
+        printError(result);
+        return result.getResult();
+    }
+
+    public List<ZabbixEventGetResponse> eventGetByHostIds(String ... hostids){
+        ZabbixEventGetRequest request = new ZabbixEventGetRequest();
+        request.setHostids(hostids);
+        return eventGet(request);
+    }
+
+    public List<ZabbixEventGetResponse> eventGetByIds(String ... eventids){
+        ZabbixEventGetRequest request = new ZabbixEventGetRequest();
+        request.setEventids(eventids);
+        return eventGet(request);
+    }
+
     public String getAuth() {
         if (this.auth == null) {
             this.auth = this.userLogin(this.user, this.password);
