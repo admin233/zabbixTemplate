@@ -698,6 +698,12 @@ public class ZabbixTemplate {
         return this.mediaTypeGet(zabbixMediaTypeRequest);
     }
 
+    public List<ZabbixMediaTypeGetResponse> mediaTypeGetByUserids(String ... userids){
+        ZabbixMediaTypeRequest zabbixMediaTypeRequest = new ZabbixMediaTypeRequest();
+        zabbixMediaTypeRequest.setUserids(userids);
+        return this.mediaTypeGet(zabbixMediaTypeRequest);
+    }
+
     public List<ZabbixMediaTypeGetResponse> mediaTypeGet(ZabbixMediaTypeRequest zabbixMediaTypeRequest){
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

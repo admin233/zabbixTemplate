@@ -25,4 +25,13 @@ public class ZabbixMediaTypeRequest extends ZabbixGenericRequest{
         this.params.put("filter", filter);
         return this;
     }
+
+    public ZabbixMediaTypeRequest setUserids(String ... userids){
+        return setUserids(Arrays.asList(userids));
+    }
+
+    public ZabbixMediaTypeRequest setUserids(List<String> userids){
+        addField("userids",userids);
+        return this;
+    }
 }
