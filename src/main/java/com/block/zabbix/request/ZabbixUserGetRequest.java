@@ -10,6 +10,7 @@ public class ZabbixUserGetRequest extends ZabbixGenericRequest{
     public ZabbixUserGetRequest() {
         super();
         this.params.put("output", "extend");
+        this.params.put("selectMedias","extend");
     }
 
     /**
