@@ -1,7 +1,6 @@
 package com.block.zabbix.response;
 
 import com.block.zabbix.pojo.ZabbixUserMedia;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
@@ -40,5 +39,9 @@ public class ZabbixUserGetResponse {
     public String rowsPerPage;
     @JsonProperty("medias")
     public List<ZabbixUserMedia<Object>> medias;
+    @JsonProperty("usrgrps")
+    public List<ZabbixUserGroupGetResponse> usrgrps;
+    @JsonProperty("mediatypes")
+    public List<ZabbixMediaTypeGetResponse> mediatypes;
 
 }

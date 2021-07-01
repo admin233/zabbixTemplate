@@ -11,6 +11,8 @@ public class ZabbixUserGetRequest extends ZabbixGenericRequest{
         super();
         this.params.put("output", "extend");
         this.params.put("selectMedias","extend");
+        this.params.put("selectUsrgrps","extend");
+        this.params.put("selectMediatypes","extend");
     }
 
     /**
