@@ -1,6 +1,7 @@
 package com.block.zabbix.request;
 
 import com.block.zabbix.pojo.ZabbixUserMedia;
+import org.springframework.util.ObjectUtils;
 
 import java.util.*;
 
@@ -64,9 +65,7 @@ public class ZabbixUserCreateRequest extends ZabbixGenericRequest{
     }
 
     /**
-     * 为用户创建媒体。
-     * @param user_medias
-     * @return
+     * 为用户创建媒介类型
      */
     public ZabbixUserCreateRequest setUser_medias(List<ZabbixUserMedia> user_medias){
         this.params.put("user_medias",user_medias);
@@ -76,6 +75,23 @@ public class ZabbixUserCreateRequest extends ZabbixGenericRequest{
     public ZabbixUserCreateRequest setUser_medias(ZabbixUserMedia ... user_medias){
         setUser_medias(Arrays.asList(user_medias));
         return this;
+    }
+
+    /**
+     * 为用户增加媒介类型
+     */
+    public ZabbixUserCreateRequest addUserMedias(List<ZabbixUserMedia> userMedia){
+        Object user_medias_obj = this.params.get("user_medias");
+        List<ZabbixUserMedia> user_media_list = new ArrayList<>();
+        if(!ObjectUtils.isEmpty(user_medias_obj)){
+            user_media_list = (List<ZabbixUserMedia>) user_medias_obj;
+        }
+        user_media_list.addAll(userMedia);
+        return setUser_medias(user_media_list);
+    }
+
+    public ZabbixUserCreateRequest addUserMedias(ZabbixUserMedia ... userMedia){
+        return addUserMedias(Arrays.asList(userMedia));
     }
 
     /**
