@@ -1,6 +1,10 @@
 package com.block.zabbix.response;
 
+import com.block.zabbix.pojo.ZabbixGroupTagDTO;
+import com.block.zabbix.pojo.ZabbixRightDTO;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.List;
 
 public class ZabbixUserGroupGetResponse {
 
@@ -14,44 +18,10 @@ public class ZabbixUserGroupGetResponse {
     public String usersStatus;
     @JsonProperty("debug_mode")
     public String debugMode;
-
-    public String getUsrgrpid() {
-        return usrgrpid;
-    }
-
-    public void setUsrgrpid(String usrgrpid) {
-        this.usrgrpid = usrgrpid;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getGuiAccess() {
-        return guiAccess;
-    }
-
-    public void setGuiAccess(String guiAccess) {
-        this.guiAccess = guiAccess;
-    }
-
-    public String getUsersStatus() {
-        return usersStatus;
-    }
-
-    public void setUsersStatus(String usersStatus) {
-        this.usersStatus = usersStatus;
-    }
-
-    public String getDebugMode() {
-        return debugMode;
-    }
-
-    public void setDebugMode(String debugMode) {
-        this.debugMode = debugMode;
-    }
+    @JsonProperty("rights")
+    public List<ZabbixRightDTO> rights;
+    @JsonProperty("tagFilters")
+    public List<ZabbixGroupTagDTO> tagFilters;
+    @JsonProperty("users")
+    public List<ZabbixUserGetResponse> users;
 }

@@ -10,6 +10,9 @@ public class ZabbixUserGroupGetRequest extends ZabbixGenericRequest{
     public ZabbixUserGroupGetRequest() {
         super();
         this.params.put("output", "extend");
+        this.params.put("selectRights", "extend");
+        this.params.put("selectTagFilters", "extend");
+//        this.params.put("selectUsers", "extend");
     }
 
     public ZabbixUserGroupGetRequest setStatus(int status){
