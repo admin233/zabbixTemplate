@@ -81,7 +81,7 @@ public class ZabbixUserCreateRequest extends ZabbixGenericRequest{
      * 为用户增加媒介类型
      */
     public ZabbixUserCreateRequest addUserMedias(List<ZabbixUserMedia> userMedia){
-        if(!ObjectUtils.isArray(userMedia)) {
+        if(ObjectUtils.isEmpty(userMedia)) {
             return this;
         }
         Object user_medias_obj = this.params.get("user_medias");
