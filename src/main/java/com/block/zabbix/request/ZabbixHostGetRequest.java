@@ -13,6 +13,11 @@ public class ZabbixHostGetRequest {
 		return params;
 	}
 
+	public ZabbixHostGetRequest() {
+		super();
+		setSelectParentTemplates();
+	}
+
 	public ZabbixHostGetRequest addField(String fieldName, Object fieldValue) {
 		this.params.put(fieldName, fieldValue);
 		return this;
@@ -32,6 +37,10 @@ public class ZabbixHostGetRequest {
 		return this;
 	}
 
+	public ZabbixHostGetRequest setSelectParentTemplates(){
+		return addField("selectParentTemplates",Arrays.asList(new String[]{"templateid","name","host","description"}));
+	}
+
 	public ZabbixHostGetRequest setFilterHosts(String... hosts) {
 		return this.setFilterHosts(Arrays.asList(hosts));
 	}
@@ -39,9 +48,7 @@ public class ZabbixHostGetRequest {
 	public ZabbixHostGetRequest setFilterHosts(List<String> hosts) {
 		Map<String, Object> filter = new HashMap<>(1);
 		filter.put("host", hosts);
-
 		this.params.put("filter", filter);
 		return this;
 	}
-
 }

@@ -1,9 +1,7 @@
 package com.block.zabbix.response;
 
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import java.util.List;
 
-@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class ZabbixHostGetResponse {
 
 	private String hostid;
@@ -49,6 +47,7 @@ public class ZabbixHostGetResponse {
 	private String autoCompress;
 	private String discover;
 	private String inventoryMode;
+	private List<ZabbixTemplateGetResponse> parentTemplates;
 
 	public String getHostid() {
 		return hostid;
@@ -394,4 +393,11 @@ public class ZabbixHostGetResponse {
 		this.inventoryMode = inventoryMode;
 	}
 
+	public List<ZabbixTemplateGetResponse> getParentTemplates() {
+		return parentTemplates;
+	}
+
+	public void setParentTemplates(List<ZabbixTemplateGetResponse> parentTemplates) {
+		this.parentTemplates = parentTemplates;
+	}
 }
