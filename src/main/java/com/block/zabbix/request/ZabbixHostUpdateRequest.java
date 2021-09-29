@@ -44,8 +44,13 @@ public class ZabbixHostUpdateRequest {
 		return this;
 	}
 
-	public ZabbixHostUpdateRequest setTemplates(List<ZabbixTemplateId> templates) {
+	public ZabbixHostUpdateRequest clearTemplates(List<ZabbixTemplateId> templates) {
 		this.params.put("templates_clear", templates);
+		return this;
+	}
+
+	public ZabbixHostUpdateRequest setTemplates(List<ZabbixTemplateId> templates) {
+		this.params.put("templates", templates);
 		return this;
 	}
 
