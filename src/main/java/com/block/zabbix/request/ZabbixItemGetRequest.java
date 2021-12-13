@@ -1,9 +1,12 @@
 package com.block.zabbix.request;
 
+import org.springframework.util.ObjectUtils;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Filter;
 
 public class ZabbixItemGetRequest {
 
@@ -41,12 +44,26 @@ public class ZabbixItemGetRequest {
 		return this;
 	}
 
-	public ZabbixItemGetRequest setFilterType(String type) {
-		Map<String, String> filter = new HashMap<>(1);
-		filter.put("type", type);
-
+	@SuppressWarnings("unchecked")
+	private ZabbixItemGetRequest setFilter(String filterName,Object filterValue){
+		Object filter = this.params.get("filter");
+		if (ObjectUtils.isEmpty(filter)) {
+			Map<String, Object> filterMap = new HashMap<>(2);
+			filterMap.put(filterName,filterValue);
+			this.params.put("filter", filterMap);
+			return this;
+		}
+		((Map<String, Object>)filter).put(filterName,filterValue);
 		this.params.put("filter", filter);
 		return this;
+	}
+
+	public ZabbixItemGetRequest setFilterName(Object name) {
+		return setFilter("name",name);
+	}
+
+	public ZabbixItemGetRequest setFilterType(Object type) {
+		return setFilter("type",type);
 	}
 
 	public ZabbixItemGetRequest setSortfield(String sortfield) {
