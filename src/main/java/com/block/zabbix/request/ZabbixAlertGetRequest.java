@@ -151,6 +151,14 @@ public class ZabbixAlertGetRequest extends ZabbixGenericRequest{
         return setTime_till(String.valueOf(time_till));
     }
 
+
+    private ZabbixAlertGetRequest setLimit(String time_till){
+        this.params.put("time_till",time_till);
+        return this;
+    }
+
+
+
     public ZabbixAlertGetRequest addFilter(String key,Object value){
         Object filter_Object = this.params.get("filter");
         Map<String, Object> filter = new HashMap<>();
