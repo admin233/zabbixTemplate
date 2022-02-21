@@ -73,18 +73,18 @@ public class ZabbixTemplate {
     }
 
     /**
-     * @param limit 获取指定条数
-     * @param timeFrom 某个时间之后的数据
-     * @param timeTill 某个时间之前的数据
+     * @param limit                        获取指定条数
+     * @param timeFrom                     某个时间之后的数据
+     * @param timeTill                     某个时间之前的数据
      * @param zabbixGetItemsByHostResponse item对象
      * @return ZabbixHistoryGetResponse
      */
     public List<ZabbixHistoryGetResponse> historyGet(int limit, long timeFrom, long timeTill, ZabbixItemGetResponse zabbixGetItemsByHostResponse) {
         ZabbixHistoryGetRequest zabbixHistoryGetRequest = new ZabbixHistoryGetRequest();
         zabbixHistoryGetRequest.setItemids(zabbixGetItemsByHostResponse)
-                .setLimit(limit==0?1000:limit)
+                .setLimit(limit == 0 ? 1000 : limit)
                 .setTimeFrom(timeFrom)
-                .setTimeTill(timeTill==0?System.currentTimeMillis()/1000:timeTill);
+                .setTimeTill(timeTill == 0 ? System.currentTimeMillis() / 1000 : timeTill);
         return this.historyGet(zabbixHistoryGetRequest);
     }
 
@@ -93,8 +93,8 @@ public class ZabbixTemplate {
      * @param itemids
      * @return
      */
-    public List<ZabbixHistoryGetResponse> historyGet(int history,String... itemids) {
-        return this.historyGet(history,Arrays.asList(itemids));
+    public List<ZabbixHistoryGetResponse> historyGet(int history, String... itemids) {
+        return this.historyGet(history, Arrays.asList(itemids));
     }
 
     /**
@@ -113,7 +113,7 @@ public class ZabbixTemplate {
      * @return
      */
     public List<ZabbixHistoryGetResponse> historyGet(int limit, long timeFrom, long timeTill, String... itemids) {
-        return this.historyGet(limit,timeFrom,timeTill,Arrays.asList(itemids));
+        return this.historyGet(limit, timeFrom, timeTill, Arrays.asList(itemids));
     }
 
     /**
@@ -124,8 +124,8 @@ public class ZabbixTemplate {
      * @param itemids
      * @return
      */
-    public List<ZabbixHistoryGetResponse> historyGet(int history,int limit, long timeFrom, long timeTill, String... itemids) {
-        return this.historyGet(history,limit,timeFrom,timeTill,Arrays.asList(itemids));
+    public List<ZabbixHistoryGetResponse> historyGet(int history, int limit, long timeFrom, long timeTill, String... itemids) {
+        return this.historyGet(history, limit, timeFrom, timeTill, Arrays.asList(itemids));
     }
 
     /**
@@ -133,7 +133,7 @@ public class ZabbixTemplate {
      * @return
      */
     public List<ZabbixHistoryGetResponse> historyGet(ZabbixItemGetResponse zabbixGetItemsByHostResponse) {
-        return this.historyGet(0,0,0,zabbixGetItemsByHostResponse);
+        return this.historyGet(0, 0, 0, zabbixGetItemsByHostResponse);
     }
 
     /**
@@ -151,7 +151,7 @@ public class ZabbixTemplate {
      * @param itemids
      * @return
      */
-    public List<ZabbixHistoryGetResponse> historyGet(int history,List<String> itemids) {
+    public List<ZabbixHistoryGetResponse> historyGet(int history, List<String> itemids) {
         ZabbixHistoryGetRequest zabbixHistoryGetRequest = new ZabbixHistoryGetRequest(history);
         zabbixHistoryGetRequest.setItemids(itemids);
         return this.historyGet(zabbixHistoryGetRequest);
@@ -165,16 +165,18 @@ public class ZabbixTemplate {
      * @param itemids
      * @return
      */
-    public List<ZabbixHistoryGetResponse> historyGet(int history,int limit, long timeFrom, long timeTill, List<String> itemids) {
+    public List<ZabbixHistoryGetResponse> historyGet(int history, int limit, long timeFrom, long timeTill, List<String> itemids) {
         ZabbixHistoryGetRequest zabbixHistoryGetRequest = new ZabbixHistoryGetRequest(history);
         zabbixHistoryGetRequest.setItemids(itemids)
                 .setTimeFrom(timeFrom)
-                .setTimeTill(timeTill==0?System.currentTimeMillis()/1000:timeTill)
+                .setTimeTill(timeTill == 0 ? System.currentTimeMillis() / 1000 : timeTill)
                 .setLimit(limit);
         return this.historyGet(zabbixHistoryGetRequest);
     }
 
-    /**参数可选，多参数
+    /**
+     * 参数可选，多参数
+     *
      * @param limit
      * @param timeFrom
      * @param timeTill
@@ -192,7 +194,7 @@ public class ZabbixTemplate {
 
     /**
      * @param zabbixHistoryGetRequest 请求
-     * @return  ZabbixHistoryGetResponse
+     * @return ZabbixHistoryGetResponse
      */
     public List<ZabbixHistoryGetResponse> historyGet(ZabbixHistoryGetRequest zabbixHistoryGetRequest) {
         HttpHeaders headers = new HttpHeaders();
@@ -613,25 +615,27 @@ public class ZabbixTemplate {
 
     /**
      * get template by host id list
+     *
      * @param hostids
      * @return
      */
-    public List<ZabbixTemplateGetResponse> getTemplateByHostids(String...hostids){
+    public List<ZabbixTemplateGetResponse> getTemplateByHostids(String... hostids) {
         ZabbixTemplateGetRequest zabbixTemplateGetRequest = new ZabbixTemplateGetRequest();
         return templateGet(zabbixTemplateGetRequest.setHostids(hostids));
     }
 
     /**
      * get template by name list
+     *
      * @param names
      * @return
      */
-    public List<ZabbixTemplateGetResponse> getTemplateByName(String ... names){
+    public List<ZabbixTemplateGetResponse> getTemplateByName(String... names) {
         ZabbixTemplateGetRequest zabbixTemplateGetRequest = new ZabbixTemplateGetRequest();
         return templateGet(zabbixTemplateGetRequest.setHost(names));
     }
 
-    public List<ZabbixTemplateGetResponse> templateGet(ZabbixTemplateGetRequest zabbixTemplateGetRequest){
+    public List<ZabbixTemplateGetResponse> templateGet(ZabbixTemplateGetRequest zabbixTemplateGetRequest) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -650,25 +654,27 @@ public class ZabbixTemplate {
 
     /**
      * 获取所有代理
+     *
      * @return
      */
-    public List<ZabbixProxyGetResponse> proxyGetAll(){
+    public List<ZabbixProxyGetResponse> proxyGetAll() {
         ZabbixProxyGetRequest zabbixProxyGetRequest = new ZabbixProxyGetRequest();
         return this.proxyGet(zabbixProxyGetRequest);
     }
 
     /**
      * 根据名字获取代理
+     *
      * @param name
      * @return
      */
-    public List<ZabbixProxyGetResponse> proxyGetByName(String ... name){
+    public List<ZabbixProxyGetResponse> proxyGetByName(String... name) {
         ZabbixProxyGetRequest zabbixProxyGetRequest = new ZabbixProxyGetRequest();
         zabbixProxyGetRequest.setFilterHosts(name);
         return this.proxyGet(zabbixProxyGetRequest);
     }
 
-    public List<ZabbixProxyGetResponse> proxyGet(ZabbixProxyGetRequest zabbixProxyGetRequest){
+    public List<ZabbixProxyGetResponse> proxyGet(ZabbixProxyGetRequest zabbixProxyGetRequest) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -689,22 +695,23 @@ public class ZabbixTemplate {
 
     /**
      * 根据名称获取媒介类型
+     *
      * @param name
      * @return
      */
-    public List<ZabbixMediaTypeGetResponse> mediaTypeGet(String ... name){
+    public List<ZabbixMediaTypeGetResponse> mediaTypeGet(String... name) {
         ZabbixMediaTypeRequest zabbixMediaTypeRequest = new ZabbixMediaTypeRequest();
         zabbixMediaTypeRequest.setFilterNames(name);
         return this.mediaTypeGet(zabbixMediaTypeRequest);
     }
 
-    public List<ZabbixMediaTypeGetResponse> mediaTypeGetByUserids(String ... userids){
+    public List<ZabbixMediaTypeGetResponse> mediaTypeGetByUserids(String... userids) {
         ZabbixMediaTypeRequest zabbixMediaTypeRequest = new ZabbixMediaTypeRequest();
         zabbixMediaTypeRequest.setUserids(userids);
         return this.mediaTypeGet(zabbixMediaTypeRequest);
     }
 
-    public List<ZabbixMediaTypeGetResponse> mediaTypeGet(ZabbixMediaTypeRequest zabbixMediaTypeRequest){
+    public List<ZabbixMediaTypeGetResponse> mediaTypeGet(ZabbixMediaTypeRequest zabbixMediaTypeRequest) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -722,19 +729,19 @@ public class ZabbixTemplate {
         return result.getResult();
     }
 
-    public List<ZabbixUserGroupGetResponse> userGroupGet(String ... names){
+    public List<ZabbixUserGroupGetResponse> userGroupGet(String... names) {
         ZabbixUserGroupGetRequest zabbixUserGroupGetRequest = new ZabbixUserGroupGetRequest();
         zabbixUserGroupGetRequest.setFilterNames(names);
         return this.userGroupGet(zabbixUserGroupGetRequest);
     }
 
-    public List<ZabbixUserGroupGetResponse> userGroupGetById(String ... ids){
+    public List<ZabbixUserGroupGetResponse> userGroupGetById(String... ids) {
         ZabbixUserGroupGetRequest zabbixUserGroupGetRequest = new ZabbixUserGroupGetRequest();
         zabbixUserGroupGetRequest.setUsrgrpids(ids);
         return this.userGroupGet(zabbixUserGroupGetRequest);
     }
 
-    public List<ZabbixUserGroupGetResponse> userGroupGet(ZabbixUserGroupGetRequest zabbixUserGroupGetRequest){
+    public List<ZabbixUserGroupGetResponse> userGroupGet(ZabbixUserGroupGetRequest zabbixUserGroupGetRequest) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         ZabbixRequest<Map<String, Object>> dto = new ZabbixRequest<>();
@@ -770,7 +777,7 @@ public class ZabbixTemplate {
         return result.getResult();
     }
 
-    public ZabbixUserGroupGenericResponse userGroupDel(ZabbixUserGroupDelRequest zabbixUserGroupDelRequest){
+    public ZabbixUserGroupGenericResponse userGroupDel(ZabbixUserGroupDelRequest zabbixUserGroupDelRequest) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -806,7 +813,7 @@ public class ZabbixTemplate {
         return result.getResult();
     }
 
-    public List<ZabbixUserGetResponse> userGet(ZabbixUserGetRequest zabbixUserGetRequest){
+    public List<ZabbixUserGetResponse> userGet(ZabbixUserGetRequest zabbixUserGetRequest) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         ZabbixRequest<Map<String, Object>> dto = new ZabbixRequest<>();
@@ -823,7 +830,7 @@ public class ZabbixTemplate {
         return result.getResult();
     }
 
-    public ZabbixUserGenericResponse userCreate(ZabbixUserCreateRequest zabbixUserCreateRequest){
+    public ZabbixUserGenericResponse userCreate(ZabbixUserCreateRequest zabbixUserCreateRequest) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         ZabbixRequest<Map<String, Object>> dto = new ZabbixRequest<>();
@@ -839,7 +846,7 @@ public class ZabbixTemplate {
         return result.getResult();
     }
 
-    public ZabbixUserGenericResponse userDel(ZabbixUserDelRequest zabbixUserDelRequest){
+    public ZabbixUserGenericResponse userDel(ZabbixUserDelRequest zabbixUserDelRequest) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -857,7 +864,7 @@ public class ZabbixTemplate {
         return result.getResult();
     }
 
-    public ZabbixUserGenericResponse userUpdate(ZabbixUserUpdateRequest zabbixUserUpdateRequest){
+    public ZabbixUserGenericResponse userUpdate(ZabbixUserUpdateRequest zabbixUserUpdateRequest) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -875,19 +882,19 @@ public class ZabbixTemplate {
         return result.getResult();
     }
 
-    public List<ZabbixUserGetResponse> userGet(String ... names){
+    public List<ZabbixUserGetResponse> userGet(String... names) {
         ZabbixUserGetRequest zabbixUserGetRequest = new ZabbixUserGetRequest();
         zabbixUserGetRequest.setFilterNames(names);
         return this.userGet(zabbixUserGetRequest);
     }
 
-    public List<ZabbixUserGetResponse> userGetByAlias(String ... alias){
+    public List<ZabbixUserGetResponse> userGetByAlias(String... alias) {
         ZabbixUserGetRequest zabbixUserGetRequest = new ZabbixUserGetRequest();
         zabbixUserGetRequest.setFilterAlias(alias);
         return this.userGet(zabbixUserGetRequest);
     }
 
-    public List<ZabbixActionsGetResponse> actionGet(ZabbixActionGetRequest zabbixActionGetRequest){
+    public List<ZabbixActionsGetResponse> actionGet(ZabbixActionGetRequest zabbixActionGetRequest) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -904,13 +911,13 @@ public class ZabbixTemplate {
         return result.getResult();
     }
 
-    public List<ZabbixActionsGetResponse> tiggerActionGetByName(String ... name){
+    public List<ZabbixActionsGetResponse> tiggerActionGetByName(String... name) {
         ZabbixActionGetRequest request = new ZabbixActionGetRequest();
         request.setFilterName(name).setFilterEventsource(0);
         return this.actionGet(request);
     }
 
-    public ZabbixActionGenericResponse actionCreate(ZabbixActionCreateRequest zabbixActionCreateRequest){
+    public ZabbixActionGenericResponse actionCreate(ZabbixActionCreateRequest zabbixActionCreateRequest) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         ZabbixRequest<Map<String, Object>> dto = new ZabbixRequest<>();
@@ -926,7 +933,7 @@ public class ZabbixTemplate {
         return result.getResult();
     }
 
-    public ZabbixActionGenericResponse actionDel(ZabbixActionDelRequest zabbixActionDelRequest){
+    public ZabbixActionGenericResponse actionDel(ZabbixActionDelRequest zabbixActionDelRequest) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -944,7 +951,7 @@ public class ZabbixTemplate {
         return result.getResult();
     }
 
-    public List<ZabbixAlertGetResponse> alertGet(ZabbixAlertGetRequest zabbixAlertGetRequest){
+    public List<ZabbixAlertGetResponse> alertGet(ZabbixAlertGetRequest zabbixAlertGetRequest) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -961,12 +968,12 @@ public class ZabbixTemplate {
         return result.getResult();
     }
 
-    public ZabbixActionGenericResponse actionDel(String ... actionids){
+    public ZabbixActionGenericResponse actionDel(String... actionids) {
         ZabbixActionDelRequest request = new ZabbixActionDelRequest(actionids);
         return actionDel(request);
     }
 
-    public ZabbixActionGenericResponse actionUpdate(ZabbixActionUpdateRequest zabbixActionUpdateRequest){
+    public ZabbixActionGenericResponse actionUpdate(ZabbixActionUpdateRequest zabbixActionUpdateRequest) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -984,7 +991,98 @@ public class ZabbixTemplate {
         return result.getResult();
     }
 
-    public List<ZabbixEventGetResponse> eventGet(ZabbixEventGetRequest zabbixEventGetRequest){
+    /**
+     * event更新事件
+     *
+     * @param zabbixEventAcknowledgeRequest 事件更新的请求
+     */
+    public void eventAcknowledge(ZabbixEventAcknowledgeRequest zabbixEventAcknowledgeRequest) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        ZabbixRequest<Map<String, Object>> dto = new ZabbixRequest<>();
+        dto.setJsonrpc(jsonrpc).setMethod("event.acknowledge").setId(38).setAuth(getAuth())
+                .setParams(zabbixEventAcknowledgeRequest.getParams());
+        HttpEntity<ZabbixRequest<Map<String, Object>>> request = new HttpEntity<>(dto, headers);
+        ResponseEntity<ZabbixResponse<ZabbixEventAcknowledgeResponse>> response = restTemplate.exchange(url, POST, request,
+                new ParameterizedTypeReference<ZabbixResponse<ZabbixEventAcknowledgeResponse>>() {
+                });
+        ZabbixResponse<ZabbixEventAcknowledgeResponse> result = response.getBody();
+        printError(result);
+    }
+
+    /**
+     * 关闭事件
+     *
+     * @param closeMessage 关闭的信息提示
+     * @param eventIds     待关闭的事件的id
+     */
+    public void eventClose(String closeMessage, String... eventIds) {
+        eventClose(closeMessage, Arrays.asList(eventIds));
+    }
+
+    /**
+     * 关闭事件
+     *
+     * @param closeMessage 关闭的信息提示
+     * @param eventIds     待关闭的事件的id
+     */
+    public void eventClose(String closeMessage, List<String> eventIds) {
+        ZabbixEventAcknowledgeRequest zabbixEventAcknowledgeRequest = new ZabbixEventAcknowledgeRequest();
+        zabbixEventAcknowledgeRequest.setEventIds(eventIds)
+                .setAction(5)
+                .setMessage(closeMessage);
+        eventAcknowledge(zabbixEventAcknowledgeRequest);
+    }
+
+    /**
+     * 更改多个事件的严重等级并留下一个信息。
+     *
+     * @param message  信息
+     * @param severity 修改之后的事件等级
+     * @param eventIds 需要修改的事件的id
+     */
+    public void eventSeverityModify(String message, int severity, String... eventIds) {
+        eventSeverityModify(message, severity, Arrays.asList(eventIds));
+    }
+
+
+    public void eventSeverityModify(String message, int severity, List<String> eventIds) {
+        ZabbixEventAcknowledgeRequest zabbixEventAcknowledgeRequest = new ZabbixEventAcknowledgeRequest();
+        zabbixEventAcknowledgeRequest.setEventIds(eventIds)
+                .setAction(12)
+                .setMessage(message)
+                .setSeverity(severity);
+        eventAcknowledge(zabbixEventAcknowledgeRequest);
+    }
+
+
+    /**
+     * 确认一个事件并留下一个信息。
+     *
+     * @param message  信息
+     * @param eventIds 待确认的事件id
+     */
+    public void eventConfirm(String message, List<String> eventIds) {
+        ZabbixEventAcknowledgeRequest zabbixEventAcknowledgeRequest = new ZabbixEventAcknowledgeRequest();
+        zabbixEventAcknowledgeRequest.setEventIds(eventIds)
+                .setAction(6)
+                .setMessage(message);
+        eventAcknowledge(zabbixEventAcknowledgeRequest);
+    }
+
+    /**
+     * 确认一个事件并留下一个信息。
+     *
+     * @param message  信息
+     * @param eventIds 待确认的事件id
+     */
+    public void eventConfirm(String message, String... eventIds) {
+        eventConfirm(message, Arrays.asList(eventIds));
+    }
+
+
+    public List<ZabbixEventGetResponse> eventGet(ZabbixEventGetRequest zabbixEventGetRequest) {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -1001,13 +1099,13 @@ public class ZabbixTemplate {
         return result.getResult();
     }
 
-    public List<ZabbixEventGetResponse> eventGetByHostIds(String ... hostids){
+    public List<ZabbixEventGetResponse> eventGetByHostIds(String... hostids) {
         ZabbixEventGetRequest request = new ZabbixEventGetRequest();
         request.setHostids(hostids);
         return eventGet(request);
     }
 
-    public List<ZabbixEventGetResponse> eventGetByIds(String ... eventids){
+    public List<ZabbixEventGetResponse> eventGetByIds(String... eventids) {
         ZabbixEventGetRequest request = new ZabbixEventGetRequest();
         request.setEventids(eventids);
         return eventGet(request);
