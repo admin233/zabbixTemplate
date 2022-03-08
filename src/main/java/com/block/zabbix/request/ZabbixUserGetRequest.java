@@ -44,7 +44,7 @@ public class ZabbixUserGetRequest extends ZabbixGenericRequest{
     }
 
     public ZabbixUserGetRequest setUserids(String ... userids){
-        return this.setUsrgrpids(userids.length>0? Arrays.asList(userids):null);
+        return this.setUserids(userids.length>0? Arrays.asList(userids):null);
     }
 
 
