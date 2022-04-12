@@ -72,6 +72,24 @@ public class ZabbixTemplate {
         return result.getResult();
     }
 
+    public ZabbixApplicationGenericResponse applicationCreate(ZabbixApplicationCreateRequest zabbixApplicationCreateRequest){
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        ZabbixRequest<Map<String, Object>> dto = new ZabbixRequest<>();
+        dto.setJsonrpc(jsonrpc).setMethod("application.create").setId(21).setAuth(getAuth())
+                .setParams(zabbixApplicationCreateRequest.getParams());
+
+        HttpEntity<ZabbixRequest<Map<String, Object>>> request = new HttpEntity<>(dto, headers);
+        ResponseEntity<ZabbixResponse<ZabbixApplicationGenericResponse>> response = restTemplate.exchange(url, POST,
+                request, new ParameterizedTypeReference<ZabbixResponse<ZabbixApplicationGenericResponse>>() {
+                });
+
+        ZabbixResponse<ZabbixApplicationGenericResponse> result = response.getBody();
+        printError(result);
+        return result.getResult();
+    }
+
     /**
      * @param limit                        获取指定条数
      * @param timeFrom                     某个时间之后的数据
