@@ -44,6 +44,14 @@ public class ZabbixItemGetRequest {
         return setSearch("key", searchKey);
     }
 
+    public ZabbixItemGetRequest setItemids(List<String> itemids) {
+        return addField("itemids", itemids);
+    }
+
+    public ZabbixItemGetRequest setItemids(String ... itemids) {
+        return setItemids(Arrays.asList(itemids));
+    }
+
     @SuppressWarnings("unchecked")
     private ZabbixItemGetRequest setSearch(String searchName, Object searchKey) {
         Object search = this.params.get("search");
