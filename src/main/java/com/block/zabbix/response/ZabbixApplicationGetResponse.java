@@ -4,9 +4,17 @@ import java.util.List;
 
 public class ZabbixApplicationGetResponse {
 	private String applicationid;
+	/**
+	 * ID of the host or tamplate that the application belongs to.
+	 *
+	 * Cannot be updated.
+	 */
 	private String hostid;
 	private String name;
 	private int flags;
+	/**
+	 * (readonly) IDs of the parent template applications.
+	 */
 	private List<String> templateids;
 
 	public String getApplicationid() {
