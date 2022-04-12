@@ -6,6 +6,7 @@ public class ZabbixApplicationGetResponse {
 	private String applicationid;
 	private String hostid;
 	private String name;
+	private int flags;
 	private List<String> templateids;
 
 	public String getApplicationid() {
@@ -38,5 +39,13 @@ public class ZabbixApplicationGetResponse {
 
 	public void setTemplateids(List<String> templateids) {
 		this.templateids = templateids;
+	}
+
+	public int getFlags() {
+		return flags;
+	}
+
+	public void setFlags(int flags) {
+		this.flags = flags;
 	}
 }
