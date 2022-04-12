@@ -11,6 +11,13 @@ public class ZabbixApplicationGetResponse {
 	 */
 	private String hostid;
 	private String name;
+	/**
+	 * (readonly) Origin of the application.
+	 *
+	 * Possible values:
+	 * 0 - a plain application;
+	 * 4 - a discovered application.
+	 */
 	private int flags;
 	/**
 	 * (readonly) IDs of the parent template applications.
