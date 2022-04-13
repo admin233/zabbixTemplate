@@ -1129,6 +1129,59 @@ public class ZabbixTemplate {
         return eventGet(request);
     }
 
+    public List<ZabbixTriggerGetResponse> triggerGet(ZabbixTriggerGetRequest zabbixTriggerGetRequest) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        ZabbixRequest<Map<String, Object>> dto = new ZabbixRequest<>();
+        dto.setJsonrpc(jsonrpc).setMethod("trigger.get").setId(40).setAuth(getAuth())
+                .setParams(zabbixTriggerGetRequest.getParams());
+
+        HttpEntity<ZabbixRequest<Map<String, Object>>> request = new HttpEntity<>(dto, headers);
+        ResponseEntity<ZabbixResponse<List<ZabbixTriggerGetResponse>>> response = restTemplate.exchange(url, POST, request,
+                new ParameterizedTypeReference<ZabbixResponse<List<ZabbixTriggerGetResponse>>>() {
+                });
+
+        ZabbixResponse<List<ZabbixTriggerGetResponse>> result = response.getBody();
+        printError(result);
+        return result.getResult();
+    }
+
+    public ZabbixTriggerGenericResponse triggerCreate(ZabbixTriggerCreateRequest zabbixTriggerCreateRequest) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        ZabbixRequest<Map<String, Object>> dto = new ZabbixRequest<>();
+        dto.setJsonrpc(jsonrpc).setMethod("trigger.create").setId(40).setAuth(getAuth())
+                .setParams(zabbixTriggerCreateRequest.getParams());
+
+        HttpEntity<ZabbixRequest<Map<String, Object>>> request = new HttpEntity<>(dto, headers);
+        ResponseEntity<ZabbixResponse<ZabbixTriggerGenericResponse>> response = restTemplate.exchange(url, POST, request,
+                new ParameterizedTypeReference<ZabbixResponse<ZabbixTriggerGenericResponse>>() {
+                });
+
+        ZabbixResponse<ZabbixTriggerGenericResponse> result = response.getBody();
+        printError(result);
+        return result.getResult();
+    }
+
+    public ZabbixTriggerGenericResponse triggerDelete(List<String> triggerIds) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        ZabbixRequest<List<String>> dto = new ZabbixRequest<>();
+        dto.setJsonrpc(jsonrpc).setMethod("trigger.delete").setId(40).setAuth(getAuth()).setParams(triggerIds);
+
+        HttpEntity<ZabbixRequest<List<String>>> request = new HttpEntity<>(dto, headers);
+        ResponseEntity<ZabbixResponse<ZabbixTriggerGenericResponse>> response = restTemplate.exchange(url, POST, request,
+                new ParameterizedTypeReference<ZabbixResponse<ZabbixTriggerGenericResponse>>() {
+                });
+
+        ZabbixResponse<ZabbixTriggerGenericResponse> result = response.getBody();
+        printError(result);
+        return result.getResult();
+    }
+
     public String getAuth() {
         if (this.auth == null) {
             this.auth = this.userLogin(this.user, this.password);
