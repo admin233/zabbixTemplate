@@ -45,4 +45,26 @@ public class ZabbixTriggerGetRequest extends ZabbixGenericRequest {
     public ZabbixTriggerGetRequest setTriggerids(String ... triggerids){
         return setTriggerids(Arrays.asList(triggerids));
     }
+
+    public ZabbixTriggerGetRequest setExpandExpression(boolean expandExpression){
+        addField("expandExpression",expandExpression);
+        return this;
+    }
+
+    public ZabbixTriggerGetRequest setExpandDescription(boolean expandDescription){
+        addField("expandDescription",expandDescription);
+        return this;
+    }
+
+    public ZabbixTriggerGetRequest setExpandComment(boolean expandComment){
+        addField("expandComment",expandComment);
+        return this;
+    }
+
+    public ZabbixTriggerGetRequest setExpandAllMacros(boolean expandAllMacros){
+        setExpandExpression(expandAllMacros);
+        setExpandDescription(expandAllMacros);
+        setExpandComment(expandAllMacros);
+        return this;
+    }
 }
