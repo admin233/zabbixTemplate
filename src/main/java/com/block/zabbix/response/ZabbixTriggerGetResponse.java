@@ -1,5 +1,7 @@
 package com.block.zabbix.response;
 
+import com.block.zabbix.pojo.ZabbixTag;
+
 import java.util.List;
 
 public class ZabbixTriggerGetResponse {
@@ -24,6 +26,7 @@ public class ZabbixTriggerGetResponse {
     public String correlation_mode;
     public String correlation_tag;
     public String manual_close;
+    public List<ZabbixTag> tags;
 
     public List<Functions> getFunctions() {
         return functions;
@@ -183,6 +186,14 @@ public class ZabbixTriggerGetResponse {
 
     public void setManual_close(String manual_close) {
         this.manual_close = manual_close;
+    }
+
+    public List<ZabbixTag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<ZabbixTag> tags) {
+        this.tags = tags;
     }
 
     public static class Functions {

@@ -6,6 +6,10 @@ public class ZabbixTag {
 
 	private String value;
 
+	public ZabbixTag() {
+		super();
+	}
+
 	public ZabbixTag(String tag, String value) {
 		this.tag = tag;
 		this.value = value;

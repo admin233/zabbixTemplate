@@ -1,5 +1,7 @@
 package com.block.zabbix.request;
 
+import com.block.zabbix.pojo.ZabbixTag;
+
 import java.util.*;
 
 public class ZabbixTriggerCreateRequest {
@@ -38,6 +40,17 @@ public class ZabbixTriggerCreateRequest {
 
 	public ZabbixTriggerCreateRequest setDependencies(String ... triggerids) {
 		return setDependencies(Arrays.asList(triggerids));
+	}
+
+	public ZabbixTriggerCreateRequest setTags(List<ZabbixTag> tags){
+		this.params.put("tags", tags);
+		return this;
+	}
+
+	public ZabbixTriggerCreateRequest setTags(String tag,String value){
+		List<ZabbixTag> tags = new ArrayList<>();
+		tags.add(new ZabbixTag(tag,value));
+		return setTags(tags);
 	}
 
 	public ZabbixTriggerCreateRequest setComments(String comments) {
@@ -142,4 +155,6 @@ public class ZabbixTriggerCreateRequest {
 		this.params.put("manual_close", manual_close);
 		return this;
 	}
+
+
 }

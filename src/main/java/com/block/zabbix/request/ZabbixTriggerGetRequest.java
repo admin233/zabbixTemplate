@@ -61,10 +61,16 @@ public class ZabbixTriggerGetRequest extends ZabbixGenericRequest {
         return this;
     }
 
+    public ZabbixTriggerGetRequest setSelectTags(String output){
+        addField("selectTags",output);
+        return this;
+    }
+
     public ZabbixTriggerGetRequest setExpandAllMacros(boolean expandAllMacros){
         setExpandExpression(expandAllMacros);
         setExpandDescription(expandAllMacros);
         setExpandComment(expandAllMacros);
+        setSelectTags(expandAllMacros?"extend":null);
         return this;
     }
 }
