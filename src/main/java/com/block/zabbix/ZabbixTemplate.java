@@ -1182,6 +1182,24 @@ public class ZabbixTemplate {
         return result.getResult();
     }
 
+    public List<ZabbixMacroGetResponse> macroGet(ZabbixMacroGetRequest zabbixMacroGetRequest) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        ZabbixRequest<Map<String, Object>> dto = new ZabbixRequest<>();
+        dto.setJsonrpc(jsonrpc).setMethod("usermacro.get").setId(41).setAuth(getAuth())
+                .setParams(zabbixMacroGetRequest.getParams());
+
+        HttpEntity<ZabbixRequest<Map<String, Object>>> request = new HttpEntity<>(dto, headers);
+        ResponseEntity<ZabbixResponse<List<ZabbixMacroGetResponse>>> response = restTemplate.exchange(url, POST, request,
+                new ParameterizedTypeReference<ZabbixResponse<List<ZabbixMacroGetResponse>>>() {
+                });
+
+        ZabbixResponse<List<ZabbixMacroGetResponse>> result = response.getBody();
+        printError(result);
+        return result.getResult();
+    }
+
     public String getAuth() {
         if (this.auth == null) {
             this.auth = this.userLogin(this.user, this.password);
