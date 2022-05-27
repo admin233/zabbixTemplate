@@ -1200,6 +1200,66 @@ public class ZabbixTemplate {
         return result.getResult();
     }
 
+    public ZabbixMacroGenericResponse macroCreate(ZabbixMacroCreateRequest zabbixMacroCreateRequest) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        Object isHostmacro = zabbixMacroCreateRequest.getFileldString("hostid");
+        ZabbixRequest<Map<String, Object>> dto = new ZabbixRequest<>();
+        dto.setJsonrpc(jsonrpc).setMethod(isHostmacro!=null&&!isHostmacro.toString().equals("null")?"usermacro.create":"usermacro.createglobal")
+                .setId(41).setAuth(getAuth())
+                .setParams(zabbixMacroCreateRequest.getParams());
+
+        HttpEntity<ZabbixRequest<Map<String, Object>>> request = new HttpEntity<>(dto, headers);
+        ResponseEntity<ZabbixResponse<ZabbixMacroGenericResponse>> response = restTemplate.exchange(url, POST, request,
+                new ParameterizedTypeReference<ZabbixResponse<ZabbixMacroGenericResponse>>() {
+                });
+
+        ZabbixResponse<ZabbixMacroGenericResponse> result = response.getBody();
+        printError(result);
+        return result.getResult();
+    }
+
+    public ZabbixMacroGenericResponse macroDelete(ZabbixMacroDelRequest zabbixMacroDelRequest) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        ZabbixRequest<List<String>> dto = new ZabbixRequest<>();
+        dto.setJsonrpc(jsonrpc)
+                .setMethod(zabbixMacroDelRequest.macroType!=null&&zabbixMacroDelRequest.macroType.equals("globalmacro")?"usermacro.deleteglobal":"usermacro.delete")
+                .setId(41).setAuth(getAuth()).setParams(zabbixMacroDelRequest.getParams());
+
+        HttpEntity<ZabbixRequest<List<String>>> request = new HttpEntity<>(dto, headers);
+        ResponseEntity<ZabbixResponse<ZabbixMacroGenericResponse>> response = restTemplate.exchange(url, POST, request,
+                new ParameterizedTypeReference<ZabbixResponse<ZabbixMacroGenericResponse>>() {
+                });
+
+        ZabbixResponse<ZabbixMacroGenericResponse> result = response.getBody();
+        printError(result);
+        return result.getResult();
+    }
+
+    public ZabbixMacroGenericResponse macroUpdate(ZabbixMacroUpdateRequest zabbixMacroUpdateRequest) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        Object isGlobalmardo = zabbixMacroUpdateRequest.getFileldString("globalmacroid");
+        ZabbixRequest<Map<String, Object>> dto = new ZabbixRequest<>();
+        dto.setJsonrpc(jsonrpc)
+                .setMethod(isGlobalmardo!=null&&!isGlobalmardo.toString().equals("null")?"usermacro.updateglobal":"usermacro.update")
+                .setId(41).setAuth(getAuth())
+                .setParams(zabbixMacroUpdateRequest.getParams());
+
+        HttpEntity<ZabbixRequest<Map<String, Object>>> request = new HttpEntity<>(dto, headers);
+        ResponseEntity<ZabbixResponse<ZabbixMacroGenericResponse>> response = restTemplate.exchange(url, POST, request,
+                new ParameterizedTypeReference<ZabbixResponse<ZabbixMacroGenericResponse>>() {
+                });
+
+        ZabbixResponse<ZabbixMacroGenericResponse> result = response.getBody();
+        printError(result);
+        return result.getResult();
+    }
+
     public String getAuth() {
         if (this.auth == null) {
             this.auth = this.userLogin(this.user, this.password);
